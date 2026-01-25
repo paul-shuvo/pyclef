@@ -165,6 +165,9 @@ class ClefEvent:
         """Convert event to JSON string"""
         return json.dumps(self.to_dict())
     
+    def __str__(self) -> str:
+        return f"[{self.timestamp}] {self.level}: {self.message}"
+    
     def __repr__(self) -> str:
         msg_preview = self.message[:50] if self.message else None
         return f"ClefEvent(timestamp={self.timestamp}, level={self.level}, message={msg_preview}...)"

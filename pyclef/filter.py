@@ -107,7 +107,7 @@ class ClefEventFilterBuilder:
         ...     .filter()
     """
     
-    def __init__(self, events: ClefEventCollection) -> None:
+    def __init__(self, events: Optional[ClefEventCollection]) -> None:
         """
         Initialize the filter builder with an event collection.
         

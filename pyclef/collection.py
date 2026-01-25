@@ -98,25 +98,36 @@ class ClefEventCollection:
         filtered._events = [e for e in self._events if predicate(e)]
         return filtered
 
-    def __getitem__(self, index: Union[int, slice]) -> Union[ClefEvent, 'ClefEventCollection']:
+    def __getitem__(self, index: Union[int, slice]) -> Union['ClefEvent', 'ClefEventCollection']:
         """
-        Support indexing and slicing operations.
-        
+        Get an event by index or a new ClefEventCollection by slice.
+
         Args:
-            index: An integer index or slice object.
-        
+            index (int | slice): The index or slice to retrieve.
+
         Returns:
-            ClefEvent when indexed with int, ClefEventCollection when sliced.
-        
-        Example:
-            >>> first = collection[0]
-            >>> first_ten = collection[:10]
+            ClefEvent | ClefEventCollection: A single ClefEvent if an integer index is provided,
+            or a new ClefEventCollection if a slice is provided.
+
+        Raises:
+            IndexError: If the index is out of range.
+            TypeError: If the index is not an integer or slice.
         """
-        if isinstance(index, slice):
-            result = ClefEventCollection()
-            result._events = self._events[index]
-            return result
-        return self._events[index]
+        if isinstance(index, int):
+            # Handle negative indices
+            if index < 0:
+                index += len(self._events)
+            if index < 0 or index >= len(self._events):
+                raise IndexError("Index out of range")
+            return self._events[index]
+        elif isinstance(index, slice): # type: ignore
+            # Handle slicing
+            sliced_events = self._events[index]
+            new_collection = ClefEventCollection()
+            new_collection._events = sliced_events
+            return new_collection
+        else:
+            raise TypeError(f"Index must be an integer or a slice, not {type(index).__name__}")
 
     def __bool__(self) -> bool:
         """

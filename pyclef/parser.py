@@ -180,6 +180,11 @@ class ClefParser:
             - Use the same parser instance for multiple operations on the same file
         """
         self._file_path = file_path
+
+    @property
+    def file_path(self) -> str:
+        """Public getter for the private _file_path attribute."""
+        return self._file_path
     
     def iter_events(self, encoding: str = 'utf-8') -> Iterator[ClefEvent]:
         """Generator that yields events one at a time - best for huge files"""
