@@ -1,254 +1,207 @@
-import json
-from typing import Any, Dict, Iterator, List, Optional, Callable, Union, Pattern
-import re
-from datetime import datetime
-from enum import Enum
+"""
+CLEF File Parser Module
 
+This module provides the main parser for reading and processing CLEF (Compact Log
+Event Format) files. The ClefParser class handles file I/O, JSON parsing, and
+conversion of raw CLEF data into structured ClefEvent objects.
 
-class ClefField(str, Enum):
-    """Standard CLEF field names"""
-    TIMESTAMP = "@t"
-    MESSAGE = "@m"
-    MESSAGE_TEMPLATE = "@mt"
-    LEVEL = "@l"
-    EXCEPTION = "@x"
-    EVENT_ID = "@i"
-    RENDERINGS = "@r"
+CLEF is a compact, newline-delimited JSON format for structured log events. Each
+line in a CLEF file represents a single log event with standard fields (prefixed
+with @) and optional user-defined fields.
 
-class ClefEventFilterBuilder:
-    def __init__(self, events: 'ClefEventCollection') -> None:
-        self.events = events
-        self._start_time: Optional[str] = None
-        self._end_time: Optional[str] = None
-        self._level: Optional[str] = None
-        self._msg_pattern: Optional[Pattern[str]] = None
-        self._msg_template_pattern: Optional[Pattern[str]] = None
-        self._user_fields: Optional[Dict[str, Any]] = None
-        self._eventid: Optional[Any] = None
-        self._exception_pattern: Optional[Pattern[str]] = None
-        self._renderings_pattern: Optional[Pattern[str]] = None
+Classes:
+    ClefParser: Main parser class for reading CLEF files and creating event
+        collections.
 
-    def start_time(self, value: str) -> 'ClefEventFilterBuilder':
-        self._start_time = value
-        return self
+Features:
+    - Memory-efficient streaming with iter_events() for large files
+    - Bulk parsing with parse() for smaller files
+    - Automatic field separation (reified vs user fields)
+    - Comprehensive error handling with detailed exceptions
+    - Support for custom encoding
 
-    def end_time(self, value: str) -> 'ClefEventFilterBuilder':
-        self._end_time = value
-        return self
+Example:
+    Basic file parsing::
 
-    def level(self, value: str) -> 'ClefEventFilterBuilder':
-        self._level = value
-        return self
-
-    def msg_regex(self, value: str) -> 'ClefEventFilterBuilder':
-        try:
-            self._msg_pattern = re.compile(value)
-        except re.error as e:
-            raise ValueError(f"Invalid regex pattern '{value}': {e}") from e
-        return self
-
-    def msg_template_regex(self, value: str) -> 'ClefEventFilterBuilder':
-        try:
-            self._msg_template_pattern = re.compile(value)
-        except re.error as e:
-            raise ValueError(f"Invalid regex pattern '{value}': {e}") from e
-        return self
-
-    def user_fields(self, value: Dict[str, Any]) -> 'ClefEventFilterBuilder':
-        self._user_fields = value
-        return self
-
-    def eventid(self, value: Any) -> 'ClefEventFilterBuilder':
-        self._eventid = value
-        return self
-
-    def exception_regex(self, value: str) -> 'ClefEventFilterBuilder':
-        try:
-            self._exception_pattern = re.compile(value)
-        except re.error as e:
-            raise ValueError(f"Invalid regex pattern '{value}': {e}") from e
-        return self
-
-    def renderings_regex(self, value: str) -> 'ClefEventFilterBuilder':
-        try:
-            self._renderings_pattern = re.compile(value)
-        except re.error as e:
-            raise ValueError(f"Invalid regex pattern '{value}': {e}") from e
-        return self
-
-    def filter(self) -> 'ClefEventCollection':
-        def parse_time(t: str) -> datetime:
-            return datetime.fromisoformat(t.replace('Z', '+00:00'))
-
-        filtered = ClefEventCollection()
-        for event in self.events:
-            event_time = event.reified.get(ClefField.TIMESTAMP.value)
-            if self._start_time and event_time and parse_time(event_time) < parse_time(self._start_time):
-                continue
-            if self._end_time and event_time and parse_time(event_time) > parse_time(self._end_time):
-                continue
-            if self._level and event.reified.get(ClefField.LEVEL.value) != self._level:
-                continue
-            if self._msg_pattern:
-                msg = event.reified.get(ClefField.MESSAGE.value, '')
-                if not self._msg_pattern.search(msg):
-                    continue
-            if self._msg_template_pattern:
-                msg_template = event.reified.get(ClefField.MESSAGE_TEMPLATE.value, '')
-                if not self._msg_template_pattern.search(msg_template):
-                    continue
-            if self._exception_pattern:
-                exc = str(event.reified.get(ClefField.EXCEPTION.value, ''))
-                if not self._exception_pattern.search(exc):
-                    continue
-            if self._renderings_pattern:
-                rend = str(event.reified.get(ClefField.RENDERINGS.value, ''))
-                if not self._renderings_pattern.search(rend):
-                    continue
-            if self._user_fields:
-                if not all(event.user.get(k) == v for k, v in self._user_fields.items()):
-                    continue
-            if self._eventid is not None and event.reified.get(ClefField.EVENT_ID.value) != self._eventid:
-                continue
-            filtered.add_event(event)
-        return filtered
+        from pyclef import ClefParser
+        
+        # Parse entire file into collection
+        parser = ClefParser('application.clef')
+        events = parser.parse()
+        
+        print(f"Loaded {len(events)} events")
+        for event in events:
+            print(f"{event.timestamp} [{event.level}] {event.message}")
     
-from dataclasses import dataclass
-@dataclass
-class ClefEvent:
-    reified: Dict[str, Any]
-    user: Dict[str, Any]
+    Memory-efficient streaming for large files::
+
+        parser = ClefParser('large_log.clef')
+        
+        # Process events one at a time without loading all into memory
+        for event in parser.iter_events():
+            if event.level == 'Error':
+                print(f"Error found: {event.message}")
+                break  # Can stop early
     
-    @property
-    def timestamp(self) -> Optional[str]:
-        return self.reified.get(ClefField.TIMESTAMP.value)
+    Using filters::
+
+        parser = ClefParser('application.clef')
+        events = parser.parse()
+        
+        # Create a filter builder
+        filtered = parser.event_filter(events)\
+            .level('Error')\
+            .start_time('2026-01-24T00:00:00Z')\
+            .msg_regex(r'database.*timeout')\
+            .filter()
+        
+        print(f"Found {len(filtered)} matching events")
     
-    @property
-    def level(self) -> Optional[str]:
-        return self.reified.get(ClefField.LEVEL.value)
-    
-    @property
-    def message(self) -> Optional[str]:
-        return self.reified.get(ClefField.MESSAGE.value)
-    
-    @property
-    def message_template(self) -> Optional[str]:
-        return self.reified.get(ClefField.MESSAGE_TEMPLATE.value)
-    
-    @property
-    def exception(self) -> Optional[str]:
-        return self.reified.get(ClefField.EXCEPTION.value)
-    
-    @property
-    def event_id(self) -> Optional[Any]:
-        return self.reified.get(ClefField.EVENT_ID.value)
-    
-    @property
-    def renderings(self) -> Optional[Any]:
-        return self.reified.get(ClefField.RENDERINGS.value)
-    
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "reified": self.reified,
-            "user": self.user
-        }
-    def to_json(self) -> str:
-        return json.dumps(self.to_dict())
-    
-    def __repr__(self) -> str:
-        return f"ClefEvent(timestamp={self.timestamp}, level={self.level}, message={self.message[:50] if self.message else None}...)"
+    Error handling::
 
-class ClefEventCollection:
-    def __init__(self) -> None:
-        self._events: List[ClefEvent] = []
-
-    def add_event(self, event: ClefEvent) -> None:
-        self._events.append(event)
-
-    def filter(self, predicate: Callable[[ClefEvent], bool]) -> 'ClefEventCollection':
-        """Enable functional filtering"""
-        filtered = ClefEventCollection()
-        filtered._events = [e for e in self._events if predicate(e)]
-        return filtered
-
-    def __getitem__(self, index: Union[int, slice]) -> Union[ClefEvent, 'ClefEventCollection']:
-        """Support slicing: events[0:10]"""
-        if isinstance(index, slice):
-            result = ClefEventCollection()
-            result._events = self._events[index]
-            return result
-        return self._events[index]
-
-    def __bool__(self) -> bool:
-        return bool(self._events)
-
-    def __len__(self) -> int:
-        return len(self._events)
-
-    def __iter__(self) -> Iterator[ClefEvent]:
-        return iter(self._events)
-
-    def get_all_events(self) -> List[ClefEvent]:
-        return list(self._events)
-
-class ClefParseError(Exception):
-    """Base exception for CLEF parsing errors"""
-    pass
-
-
-class ClefFileNotFoundError(ClefParseError):
-    """Raised when CLEF file cannot be found"""
-    def __init__(self, file_path: str) -> None:
-        self.file_path = file_path
-        super().__init__(f"CLEF file not found: {file_path}")
-
-
-class ClefJSONDecodeError(ClefParseError):
-    """Raised when a line contains invalid JSON"""
-    def __init__(self, line_num: int, line_content: str, original_error: Exception) -> None:
-        self.line_num = line_num
-        self.line_content = line_content
-        self.original_error = original_error
-        super().__init__(
-            f"Invalid JSON on line {line_num}: {original_error}\n"
-            f"Content: {line_content[:100]}{'...' if len(line_content) > 100 else ''}"
+        from pyclef.exceptions import (
+            ClefFileNotFoundError,
+            ClefJSONDecodeError,
+            ClefParseError
         )
+        
+        try:
+            parser = ClefParser('log.clef')
+            events = parser.parse()
+        except ClefFileNotFoundError as e:
+            print(f"File not found: {e.file_path}")
+        except ClefJSONDecodeError as e:
+            print(f"Invalid JSON at line {e.line_num}")
+        except ClefParseError as e:
+            print(f"Parse error: {e}")
+    
+    Custom encoding::
 
+        # Parse file with specific encoding
+        parser = ClefParser('log_utf16.clef')
+        events = parser.parse(encoding='utf-16')
 
-class ClefIOError(ClefParseError):
-    """Raised when there's an I/O error reading the file"""
-    def __init__(self, file_path: str, original_error: Exception) -> None:
-        self.file_path = file_path
-        self.original_error = original_error
-        super().__init__(f"Error reading file {file_path}: {original_error}")
+CLEF Field Conventions:
+    - Fields starting with @ are standard CLEF fields (reified)
+    - Fields starting with @@ are user fields that should have a single @
+    - All other fields are user-defined custom fields
+    
+    Standard fields: @t, @m, @mt, @l, @x, @i, @r
+    User field example: @@UserId becomes @UserId in the user dictionary
+
+Notes:
+    - Use iter_events() for files larger than available memory
+    - Use parse() for convenience when file size is manageable
+    - All methods properly handle malformed JSON and missing files
+    - Parser is stateless and thread-safe for reading different files
+"""
+import json
+from typing import Any, Dict, Iterator
+
+from .collection import ClefEventCollection
+from .event import ClefEvent
+from .exceptions import ClefFileNotFoundError, ClefIOError, ClefJSONDecodeError
+from .fields import ClefField
+from .filter import ClefEventFilterBuilder
+
 
 class ClefParser:
+    """
+    Parser for CLEF (Compact Log Event Format) files.
+    
+    This class provides methods for reading CLEF-formatted log files and converting
+    them into structured ClefEvent objects. It supports both streaming (memory-efficient)
+    and bulk parsing modes, with comprehensive error handling.
+    
+    The parser automatically separates standard CLEF fields (those prefixed with @)
+    from user-defined fields, and handles the @@ escape sequence for user fields
+    that should start with a single @.
+    
+    Class Attributes:
+        REIFIED_KEYS (set): Set of standard CLEF field names that should be
+            stored in the reified dictionary.
+    
+    Attributes:
+        _file_path (str): Path to the CLEF file to be parsed.
+    
+    Example:
+        Basic usage::
+        
+            >>> from pyclef import ClefParser
+            >>> parser = ClefParser('application.clef')
+            >>> events = parser.parse()
+            >>> len(events)
+            1000
+        
+        Streaming large files::
+        
+            >>> parser = ClefParser('huge_log.clef')
+            >>> for event in parser.iter_events():
+            ...     if event.level == 'Fatal':
+            ...         print(f"Fatal error: {event.message}")
+            ...         break
+        
+        Using with filters::
+        
+            >>> events = parser.parse()
+            >>> errors = parser.event_filter(events)\
+            ...     .level('Error')\
+            ...     .filter()
+    
+    Notes:
+        - The parser is stateless and can be reused for multiple parse operations
+        - File is opened and closed automatically for each operation
+        - Supports any text encoding recognized by Python's open()
+        - Thread-safe for reading different files with different instances
+    """
+    
     REIFIED_KEYS = {field.value for field in ClefField}
 
     def __init__(self, file_path: str) -> None:
+        """
+        Initialize parser with the path to a CLEF file.
+        
+        Creates a new parser instance configured to read from the specified file.
+        The file is not opened or validated at this stage; actual reading occurs
+        when parse() or iter_events() is called.
+        
+        Args:
+            file_path: Path to the CLEF file. Can be absolute or relative.
+                The file should contain newline-delimited JSON events.
+        
+        Example:
+            >>> parser = ClefParser('logs/application.clef')
+            >>> parser = ClefParser('/var/log/app.clef')
+            >>> parser = ClefParser('relative/path/log.clef')
+        
+        Notes:
+            - File existence is not checked during initialization
+            - The path is stored as-is; no normalization is performed
+            - Use the same parser instance for multiple operations on the same file
+        """
         self._file_path = file_path
-        self._clef_event_collection: Optional[ClefEventCollection] = None
     
     def iter_events(self, encoding: str = 'utf-8') -> Iterator[ClefEvent]:
-            """Generator that yields events one at a time - best for huge files"""
-            try:
-                with open(self._file_path, 'r', encoding=encoding) as f:
-                    for line_num, line in enumerate(f, 1):
-                        line = line.strip()
-                        if not line:
-                            continue
-                        try:
-                            event = json.loads(line)
-                            yield self.parse_event(event)
-                        except json.JSONDecodeError as e:
-                            raise ClefParseError(f"Invalid JSON on line {line_num}: {e}") from e
-            except FileNotFoundError as e:
-                raise ClefFileNotFoundError(self._file_path) from e
-            except IOError as e:
-                raise ClefIOError(self._file_path, e) from e    
+        """Generator that yields events one at a time - best for huge files"""
+        try:
+            with open(self._file_path, 'r', encoding=encoding) as f:
+                for line_num, line in enumerate(f, 1):
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        event = json.loads(line)
+                        yield self.parse_event(event)
+                    except json.JSONDecodeError as e:
+                        raise ClefJSONDecodeError(line_num, line, e) from e
+        except FileNotFoundError as e:
+            raise ClefFileNotFoundError(self._file_path) from e
+        except IOError as e:
+            raise ClefIOError(self._file_path, e) from e    
             
     @staticmethod
     def parse_event(event: Dict[str, Any]) -> ClefEvent:
+        """Parse a single event dictionary into ClefEvent"""
         UNESCAPE_PREFIX = "@@"
         reified: Dict[str, Any] = {}
         user: Dict[str, Any] = {}
@@ -260,36 +213,14 @@ class ClefParser:
             else:
                 user[k] = v
         return ClefEvent(reified, user)
+    
     def parse(self, encoding: str = 'utf-8') -> ClefEventCollection:
+        """Parse entire file into a collection"""
         collection = ClefEventCollection()
         for event in self.iter_events(encoding=encoding):
             collection.add_event(event)
         return collection
 
     def event_filter(self, events: ClefEventCollection) -> ClefEventFilterBuilder:
+        """Create a filter builder for event collection"""
         return ClefEventFilterBuilder(events)
-
-def main() -> None:
-    """Example usage - not executed on import"""
-    import os
-    clef_path = os.path.join(os.path.dirname(__file__), 'log.clef')
-    
-    parser = ClefParser(clef_path)
-
-    # Process one event at a time (minimal memory)
-    for event in parser.iter_events():
-        print(event)
-    events = parser.parse()
-    
-    filtered = parser.event_filter(events)\
-        .start_time("2026-01-23T10:00:02.120Z")\
-        .level("Debug")\
-        .msg_template_regex("Listening")\
-        .user_fields({"Port": 8080})\
-        .filter()
-    
-    for event in filtered:
-        print(event.reified, event.user)
-
-if __name__ == "__main__":
-    main()
