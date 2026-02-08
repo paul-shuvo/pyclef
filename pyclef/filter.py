@@ -55,6 +55,7 @@ Notes:
     - Invalid regex patterns raise ValueError
     - Timestamp filtering uses ISO 8601 format
 """
+
 import re
 import warnings
 from datetime import datetime
@@ -67,11 +68,13 @@ from .fields import ClefField
 
 class ClefFilterError(ClefParseError):
     """Raised when filtering operations fail"""
+
     pass
 
 
 class ClefInvalidTimestampError(ClefFilterError):
     """Raised when timestamp parsing fails"""
+
     def __init__(self, timestamp: str, original_error: Exception) -> None:
         self.timestamp = timestamp
         self.original_error = original_error
@@ -106,20 +109,20 @@ class ClefEventFilterBuilder:
         ...     .user_fields({'Component': 'Database'})\
         ...     .filter()
     """
-    
+
     def __init__(self, events: Optional[ClefEventCollection]) -> None:
         """
         Initialize the filter builder with an event collection.
-        
+
         Args:
             events: The collection of CLEF events to be filtered.
-        
+
         Raises:
             ValueError: If events is None.
         """
         if events is None:
             raise ValueError("events cannot be None")
-        
+
         self.events = events
         self._start_time: Optional[str] = None
         self._end_time: Optional[str] = None
@@ -131,155 +134,157 @@ class ClefEventFilterBuilder:
         self._exception_pattern: Optional[Pattern[str]] = None
         self._renderings_pattern: Optional[Pattern[str]] = None
 
-    def start_time(self, value: str) -> 'ClefEventFilterBuilder':
+    def start_time(self, value: str) -> "ClefEventFilterBuilder":
         """
         Filter events that occurred on or after the specified timestamp.
-        
+
         Args:
             value: ISO 8601 formatted timestamp string (e.g., '2026-01-24T10:00:00Z').
-        
+
         Returns:
             Self for method chaining.
-        
+
         Raises:
             ValueError: If value is None or empty.
             ClefInvalidTimestampError: If timestamp format is invalid.
-        
+
         Example:
             >>> builder.start_time('2026-01-24T00:00:00Z')
         """
         if not value:
             raise ValueError("start_time cannot be None or empty")
-        
+
         # Validate timestamp format
         try:
             self._parse_time(value)
         except (ValueError, AttributeError) as e:
             raise ClefInvalidTimestampError(value, e) from e
-        
+
         self._start_time = value
         return self
 
-    def end_time(self, value: str) -> 'ClefEventFilterBuilder':
+    def end_time(self, value: str) -> "ClefEventFilterBuilder":
         """
         Filter events that occurred on or before the specified timestamp.
-        
+
         Args:
             value: ISO 8601 formatted timestamp string (e.g., '2026-01-24T23:59:59Z').
-        
+
         Returns:
             Self for method chaining.
-        
+
         Raises:
             ValueError: If value is None or empty.
             ClefInvalidTimestampError: If timestamp format is invalid.
-        
+
         Example:
             >>> builder.end_time('2026-01-24T23:59:59Z')
         """
         if not value:
             raise ValueError("end_time cannot be None or empty")
-        
+
         # Validate timestamp format
         try:
             self._parse_time(value)
         except (ValueError, AttributeError) as e:
             raise ClefInvalidTimestampError(value, e) from e
-        
+
         self._end_time = value
         return self
 
-    def level(self, value: str) -> 'ClefEventFilterBuilder':
+    def level(self, value: str) -> "ClefEventFilterBuilder":
         """
         Filter events by log level.
-        
+
         Args:
             value: Log level string (e.g., 'Error', 'Warning', 'Information', 'Debug').
-        
+
         Returns:
             Self for method chaining.
-        
+
         Raises:
             ValueError: If value is None or empty.
-        
+
         Example:
             >>> builder.level('Error')
         """
         if not value:
             raise ValueError("level cannot be None or empty")
-        
+
         self._level = value
         return self
 
-    def msg_regex(self, value: str) -> 'ClefEventFilterBuilder':
+    def msg_regex(self, value: str) -> "ClefEventFilterBuilder":
         """
         Filter messages using a regular expression pattern.
-        
+
         Args:
             value: Regular expression pattern string.
-        
+
         Returns:
             Self for method chaining.
-        
+
         Raises:
             ValueError: If the regex pattern is invalid or empty.
-        
+
         Example:
             >>> builder.msg_regex(r'failed.*timeout')
             >>> builder.msg_regex(r'^ERROR: ')
         """
         if not value:
             raise ValueError("msg_regex pattern cannot be None or empty")
-        
+
         try:
             self._msg_pattern = re.compile(value)
         except re.error as e:
             raise ValueError(f"Invalid message regex pattern '{value}': {e}") from e
         return self
 
-    def msg_template_regex(self, value: str) -> 'ClefEventFilterBuilder':
+    def msg_template_regex(self, value: str) -> "ClefEventFilterBuilder":
         """
         Filter message templates using a regular expression pattern.
-        
+
         Message templates are the structured logging templates before
         parameter substitution (e.g., "User {UserId} logged in from {IpAddress}").
-        
+
         Args:
             value: Regular expression pattern string.
-        
+
         Returns:
             Self for method chaining.
-        
+
         Raises:
             ValueError: If the regex pattern is invalid or empty.
-        
+
         Example:
             >>> builder.msg_template_regex(r'User .* logged in')
         """
         if not value:
             raise ValueError("msg_template_regex pattern cannot be None or empty")
-        
+
         try:
             self._msg_template_pattern = re.compile(value)
         except re.error as e:
-            raise ValueError(f"Invalid message template regex pattern '{value}': {e}") from e
+            raise ValueError(
+                f"Invalid message template regex pattern '{value}': {e}"
+            ) from e
         return self
 
-    def user_fields(self, value: Optional[Dict[str, Any]]) -> 'ClefEventFilterBuilder':
+    def user_fields(self, value: Optional[Dict[str, Any]]) -> "ClefEventFilterBuilder":
         """
         Filter events by custom user-defined fields.
-        
+
         Only events that have ALL specified field key-value pairs will be included.
-        
+
         Args:
             value: Dictionary of field names and their expected values.
-        
+
         Returns:
             Self for method chaining.
-        
+
         Raises:
             ValueError: If value is None or empty dictionary.
-        
+
         Example:
             >>> builder.user_fields({'Environment': 'Production', 'Service': 'API'})
             >>> builder.user_fields({'UserId': 12345})
@@ -287,21 +292,23 @@ class ClefEventFilterBuilder:
         if value is None:
             raise ValueError("user_fields cannot be None")
         if not value:
-            warnings.warn("user_fields is empty, no filtering will be applied", UserWarning)
-        
+            warnings.warn(
+                "user_fields is empty, no filtering will be applied", UserWarning
+            )
+
         self._user_fields = value
         return self
 
-    def eventid(self, value: Any) -> 'ClefEventFilterBuilder':
+    def eventid(self, value: Any) -> "ClefEventFilterBuilder":
         """
         Filter events by event ID.
-        
+
         Args:
             value: The event ID to filter by (can be string, int, or other types).
-        
+
         Returns:
             Self for method chaining.
-        
+
         Example:
             >>> builder.eventid('evt_12345')
             >>> builder.eventid(42)
@@ -309,55 +316,55 @@ class ClefEventFilterBuilder:
         self._eventid = value
         return self
 
-    def exception_regex(self, value: str) -> 'ClefEventFilterBuilder':
+    def exception_regex(self, value: str) -> "ClefEventFilterBuilder":
         """
         Filter events by exception information using a regular expression.
-        
+
         Searches the exception stack trace or error message.
-        
+
         Args:
             value: Regular expression pattern string.
-        
+
         Returns:
             Self for method chaining.
-        
+
         Raises:
             ValueError: If the regex pattern is invalid or empty.
-        
+
         Example:
             >>> builder.exception_regex(r'NullPointerException')
             >>> builder.exception_regex(r'at com\\.example\\..*')
         """
         if not value:
             raise ValueError("exception_regex pattern cannot be None or empty")
-        
+
         try:
             self._exception_pattern = re.compile(value)
         except re.error as e:
             raise ValueError(f"Invalid exception regex pattern '{value}': {e}") from e
         return self
 
-    def renderings_regex(self, value: str) -> 'ClefEventFilterBuilder':
+    def renderings_regex(self, value: str) -> "ClefEventFilterBuilder":
         """
         Filter events by renderings field using a regular expression.
-        
+
         Renderings contain alternative representations of log message parameters.
-        
+
         Args:
             value: Regular expression pattern string.
-        
+
         Returns:
             Self for method chaining.
-        
+
         Raises:
             ValueError: If the regex pattern is invalid or empty.
-        
+
         Example:
             >>> builder.renderings_regex(r'format.*json')
         """
         if not value:
             raise ValueError("renderings_regex pattern cannot be None or empty")
-        
+
         try:
             self._renderings_pattern = re.compile(value)
         except re.error as e:
@@ -368,18 +375,18 @@ class ClefEventFilterBuilder:
     def _parse_time(t: str) -> datetime:
         """
         Parse ISO 8601 timestamp string to datetime.
-        
+
         Args:
             t: ISO 8601 formatted timestamp string.
-        
+
         Returns:
             Parsed datetime object.
-        
+
         Raises:
             ValueError: If timestamp format is invalid.
         """
         try:
-            return datetime.fromisoformat(t.replace('Z', '+00:00'))
+            return datetime.fromisoformat(t.replace("Z", "+00:00"))
         except (ValueError, AttributeError) as e:
             raise ValueError(f"Invalid timestamp format: {e}") from e
 
@@ -414,7 +421,7 @@ class ClefEventFilterBuilder:
         """
         filtered = ClefEventCollection()
         skipped_count = 0
-        
+
         try:
             # Validate time range if both are set
             if self._start_time and self._end_time:
@@ -424,7 +431,7 @@ class ClefEventFilterBuilder:
                     raise ClefFilterError(
                         f"start_time ({self._start_time}) is after end_time ({self._end_time})"
                     )
-            
+
             for event in self.events:
                 try:
                     # Time-based filtering
@@ -432,15 +439,15 @@ class ClefEventFilterBuilder:
                         event_time = event.reified.get(ClefField.TIMESTAMP.value)
                         if not event_time:
                             continue  # Skip events without timestamp
-                        
+
                         try:
                             event_dt = self._parse_time(event_time)
-                            
+
                             if self._start_time:
                                 start_dt = self._parse_time(self._start_time)
                                 if event_dt < start_dt:
                                     continue
-                            
+
                             if self._end_time:
                                 end_dt = self._parse_time(self._end_time)
                                 if event_dt > end_dt:
@@ -448,90 +455,98 @@ class ClefEventFilterBuilder:
                         except (ValueError, AttributeError) as e:
                             warnings.warn(
                                 f"Skipping event with invalid timestamp '{event_time}': {e}",
-                                UserWarning
+                                UserWarning,
                             )
                             skipped_count += 1
                             continue
-                    
+
                     # Level filtering
-                    if self._level and event.reified.get(ClefField.LEVEL.value) != self._level:
+                    if (
+                        self._level
+                        and event.reified.get(ClefField.LEVEL.value) != self._level
+                    ):
                         continue
-                    
+
                     # Message pattern filtering
                     if self._msg_pattern:
-                        msg = event.reified.get(ClefField.MESSAGE.value, '')
+                        msg = event.reified.get(ClefField.MESSAGE.value, "")
                         try:
                             if not self._msg_pattern.search(str(msg)):
                                 continue
                         except (TypeError, AttributeError):
                             skipped_count += 1
                             continue
-                    
+
                     # Message template pattern filtering
                     if self._msg_template_pattern:
-                        msg_template = event.reified.get(ClefField.MESSAGE_TEMPLATE.value, '')
+                        msg_template = event.reified.get(
+                            ClefField.MESSAGE_TEMPLATE.value, ""
+                        )
                         try:
                             if not self._msg_template_pattern.search(str(msg_template)):
                                 continue
                         except (TypeError, AttributeError):
                             skipped_count += 1
                             continue
-                    
+
                     # Exception pattern filtering
                     if self._exception_pattern:
-                        exc = str(event.reified.get(ClefField.EXCEPTION.value, ''))
+                        exc = str(event.reified.get(ClefField.EXCEPTION.value, ""))
                         try:
                             if not self._exception_pattern.search(exc):
                                 continue
                         except (TypeError, AttributeError):
                             skipped_count += 1
                             continue
-                    
+
                     # Renderings pattern filtering
                     if self._renderings_pattern:
-                        rend = str(event.reified.get(ClefField.RENDERINGS.value, ''))
+                        rend = str(event.reified.get(ClefField.RENDERINGS.value, ""))
                         try:
                             if not self._renderings_pattern.search(rend):
                                 continue
                         except (TypeError, AttributeError):
                             skipped_count += 1
                             continue
-                    
+
                     # User fields filtering
                     if self._user_fields:
                         try:
-                            if not all(event.user.get(k) == v for k, v in self._user_fields.items()):
+                            if not all(
+                                event.user.get(k) == v
+                                for k, v in self._user_fields.items()
+                            ):
                                 continue
                         except (AttributeError, TypeError):
                             skipped_count += 1
                             continue
-                    
+
                     # Event ID filtering
                     if self._eventid is not None:
                         if event.reified.get(ClefField.EVENT_ID.value) != self._eventid:
                             continue
-                    
+
                     # Event passed all filters
                     filtered.add_event(event)
-                    
+
                 except Exception as e:
                     # Catch any unexpected errors and skip the event
                     warnings.warn(
                         f"Unexpected error filtering event: {e}. Event skipped.",
-                        UserWarning
+                        UserWarning,
                     )
                     skipped_count += 1
                     continue
-            
+
             # Warn if many events were skipped
             if skipped_count > 0:
                 warnings.warn(
                     f"{skipped_count} event(s) were skipped due to malformed data",
-                    UserWarning
+                    UserWarning,
                 )
-            
+
             return filtered
-            
+
         except Exception as e:
             if isinstance(e, (ClefFilterError, ClefInvalidTimestampError)):
                 raise

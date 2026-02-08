@@ -16,27 +16,27 @@ Standard Fields:
     TIMESTAMP (@t):
         ISO 8601 formatted timestamp indicating when the event occurred.
         Example: "2026-01-24T10:00:00.123Z"
-    
+
     MESSAGE (@m):
         The rendered log message with all parameters substituted.
         Example: "User alice logged in from 192.168.1.1"
-    
+
     MESSAGE_TEMPLATE (@mt):
         The structured message template before parameter substitution.
         Example: "User {UserId} logged in from {IpAddress}"
-    
+
     LEVEL (@l):
         The log level/severity of the event.
         Examples: "Verbose", "Debug", "Information", "Warning", "Error", "Fatal"
-    
+
     EXCEPTION (@x):
         Exception information including type, message, and stack trace.
         Present when the log event is associated with an error/exception.
-    
+
     EVENT_ID (@i):
         A unique identifier for this type of event, useful for categorization.
         Can be a string, integer, or other identifier type.
-    
+
     RENDERINGS (@r):
         Alternative renderings of message template parameters.
         Provides different formatting or serialization options for parameters.
@@ -45,44 +45,44 @@ Example:
     Using field enums for type-safe access::
 
         from pyclef.fields import ClefField
-        
+
         # Access field values
         timestamp_field = ClefField.TIMESTAMP.value  # "@t"
         level_field = ClefField.LEVEL.value          # "@l"
-        
+
         # Use in dictionary lookups
         event_data = {
             ClefField.TIMESTAMP.value: "2026-01-24T10:00:00Z",
             ClefField.LEVEL.value: "Information",
             ClefField.MESSAGE.value: "Application started"
         }
-        
+
         # Get timestamp from event
         timestamp = event_data.get(ClefField.TIMESTAMP.value)
-    
+
     Checking if a field is a standard CLEF field::
 
         from pyclef.fields import ClefField
-        
+
         # Get all standard field names
         standard_fields = {field.value for field in ClefField}
         # {'@t', '@m', '@mt', '@l', '@x', '@i', '@r'}
-        
+
         # Check if a field is standard
         field_name = "@t"
         is_standard = field_name in standard_fields  # True
-        
+
         field_name = "CustomField"
         is_standard = field_name in standard_fields  # False
-    
+
     Iterating over all standard fields::
 
         from pyclef.fields import ClefField
-        
+
         # List all standard fields
         for field in ClefField:
             print(f"{field.name}: {field.value}")
-        
+
         # Output:
         # TIMESTAMP: @t
         # MESSAGE: @m
@@ -104,6 +104,7 @@ See Also:
     - ClefEvent: The event class that uses these field definitions
     - ClefParser: Parser that extracts these fields from CLEF files
 """
+
 from enum import Enum
 
 """
@@ -183,6 +184,8 @@ from enum import Enum
         - Custom application fields don't use the @ prefix and aren't in this enum
         - Fields with @@ prefix in raw CLEF are user fields that happened to start with @
 """
+
+
 class ClefField(str, Enum):
     TIMESTAMP = "@t"
     MESSAGE = "@m"
