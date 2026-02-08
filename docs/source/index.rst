@@ -12,7 +12,8 @@ Welcome to pyclef's documentation!
    :hidden:
 
    pyclef
-   * :ref:`genindex`
+   genindex
+   modindex
    
 pyclef
 ======
@@ -34,7 +35,7 @@ To install `pyclef`, use `pip`:
 
 .. code-block:: bash
 
-   pip install pyclef
+   pip install pyclef-lib
 
 Usage
 =====

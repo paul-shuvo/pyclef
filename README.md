@@ -20,7 +20,7 @@
 Install `pyclef` using `pip`:
 
 ```bash
-pip install pyclef
+pip install pyclef-lib
 ```
 
 ---
