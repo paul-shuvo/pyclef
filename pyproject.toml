@@ -20,12 +20,15 @@ python = "^3.7"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.0"
-
-[tool.poetry.group.docs.dependencies]
 sphinx = "^5.3.0"  # Main Sphinx documentation generator
 shibuya = "^2026.1.9"
 sphinxcontrib-napoleon = "^0.7"  # Google-style and NumPy-style docstrings
 sphinx-autobuild = "^2021.3.14"  # Auto-rebuild and serve docs during editing
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^5.3.0"
+shibuya = "^2026.1.9"
+sphinxcontrib-napoleon = "^0.7" 
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
