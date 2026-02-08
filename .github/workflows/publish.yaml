@@ -9,6 +9,9 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
+    permissions:
+          contents: write 
+
     steps:
       # Step 1: Check out the repository
       - name: Checkout repository
