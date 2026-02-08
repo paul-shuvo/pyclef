@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>pyclef.filter - pyclef documentation</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=44020203" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="pyclef.filter"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../index.html">
+      
+      
+      <strong>pyclef</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pyclef.html">pyclef API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">pyclef</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Module code</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">pyclef.filter</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <h1>Source code for pyclef.filter</h1><div class="highlight"><pre>
+<span></span><span data-line="1"><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="2"><span class="sd">CLEF Event Filtering Module</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="sd">This module provides a fluent builder interface for filtering CLEF log events</span>
+</span><span data-line="5"><span class="sd">based on various criteria including timestamps, log levels, message patterns,</span>
+</span><span data-line="6"><span class="sd">and custom fields.</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="sd">Classes:</span>
+</span><span data-line="9"><span class="sd">    ClefEventFilterBuilder: Builder class for constructing complex event filters</span>
+</span><span data-line="10"><span class="sd">        using method chaining.</span>
+</span><span data-line="11">
+</span><span data-line="12"><span class="sd">Example:</span>
+</span><span data-line="13"><span class="sd">    Basic filtering by log level::</span>
+</span><span data-line="14">
+</span><span data-line="15"><span class="sd">        from pyclef import ClefParser</span>
+</span><span data-line="16"><span class="sd">        </span>
+</span><span data-line="17"><span class="sd">        parser = ClefParser(&#39;log.clef&#39;)</span>
+</span><span data-line="18"><span class="sd">        events = parser.parse()</span>
+</span><span data-line="19"><span class="sd">        </span>
+</span><span data-line="20"><span class="sd">        errors = parser.event_filter(events)\</span>
+</span><span data-line="21"><span class="sd">            .level(&#39;Error&#39;)\</span>
+</span><span data-line="22"><span class="sd">            .filter()</span>
+</span><span data-line="23"><span class="sd">    </span>
+</span><span data-line="24"><span class="sd">    Advanced filtering with multiple criteria::</span>
+</span><span data-line="25">
+</span><span data-line="26"><span class="sd">        filtered = parser.event_filter(events)\</span>
+</span><span data-line="27"><span class="sd">            .start_time(&#39;2026-01-24T00:00:00Z&#39;)\</span>
+</span><span data-line="28"><span class="sd">            .end_time(&#39;2026-01-24T23:59:59Z&#39;)\</span>
+</span><span data-line="29"><span class="sd">            .level(&#39;Warning&#39;)\</span>
+</span><span data-line="30"><span class="sd">            .msg_regex(r&#39;database.*timeout&#39;)\</span>
+</span><span data-line="31"><span class="sd">            .user_fields({&#39;Environment&#39;: &#39;Production&#39;})\</span>
+</span><span data-line="32"><span class="sd">            .filter()</span>
+</span><span data-line="33"><span class="sd">    </span>
+</span><span data-line="34"><span class="sd">    Chaining multiple filters::</span>
+</span><span data-line="35">
+</span><span data-line="36"><span class="sd">        critical_errors = parser.event_filter(events)\</span>
+</span><span data-line="37"><span class="sd">            .level(&#39;Error&#39;)\</span>
+</span><span data-line="38"><span class="sd">            .exception_regex(r&#39;NullPointerException&#39;)\</span>
+</span><span data-line="39"><span class="sd">            .start_time(&#39;2026-01-24T10:00:00Z&#39;)\</span>
+</span><span data-line="40"><span class="sd">            .filter()</span>
+</span><span data-line="41">
+</span><span data-line="42"><span class="sd">Supported Filter Types:</span>
+</span><span data-line="43"><span class="sd">    - Timestamp ranges (start_time, end_time)</span>
+</span><span data-line="44"><span class="sd">    - Log levels (level)</span>
+</span><span data-line="45"><span class="sd">    - Message patterns (msg_regex, msg_template_regex)</span>
+</span><span data-line="46"><span class="sd">    - Exception patterns (exception_regex)</span>
+</span><span data-line="47"><span class="sd">    - Rendering patterns (renderings_regex)</span>
+</span><span data-line="48"><span class="sd">    - Custom user fields (user_fields)</span>
+</span><span data-line="49"><span class="sd">    - Event IDs (eventid)</span>
+</span><span data-line="50">
+</span><span data-line="51"><span class="sd">Notes:</span>
+</span><span data-line="52"><span class="sd">    - All filter methods return the builder instance for method chaining</span>
+</span><span data-line="53"><span class="sd">    - Call filter() at the end to execute filtering and get results</span>
+</span><span data-line="54"><span class="sd">    - Regex patterns use Python&#39;s re module syntax</span>
+</span><span data-line="55"><span class="sd">    - Invalid regex patterns raise ValueError</span>
+</span><span data-line="56"><span class="sd">    - Timestamp filtering uses ISO 8601 format</span>
+</span><span data-line="57"><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="58">
+</span><span data-line="59"><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+</span><span data-line="60"><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+</span><span data-line="61"><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+</span><span data-line="62"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Pattern</span>
+</span><span data-line="63">
+</span><span data-line="64"><span class="kn">from</span><span class="w"> </span><span class="nn">.collection</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefEventCollection</span>
+</span><span data-line="65"><span class="kn">from</span><span class="w"> </span><span class="nn">.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefParseError</span>
+</span><span data-line="66"><span class="kn">from</span><span class="w"> </span><span class="nn">.fields</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefField</span>
+</span><span data-line="67">
+</span><span data-line="68">
+<div class="viewcode-block" id="ClefFilterError">
+<a class="viewcode-back" href="../../pyclef.html#pyclef.filter.ClefFilterError">[docs]</a>
+</span><span data-line="69"><span class="k">class</span><span class="w"> </span><span class="nc">ClefFilterError</span><span class="p">(</span><span class="n">ClefParseError</span><span class="p">):</span>
+</span><span data-line="70"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when filtering operations fail&quot;&quot;&quot;</span>
+</span><span data-line="71">
+</span><span data-line="72">    <span class="k">pass</span></div>
+
+</span><span data-line="73">
+</span><span data-line="74">
+<div class="viewcode-block" id="ClefInvalidTimestampError">
+<a class="viewcode-back" href="../../pyclef.html#pyclef.filter.ClefInvalidTimestampError">[docs]</a>
+</span><span data-line="75"><span class="k">class</span><span class="w"> </span><span class="nc">ClefInvalidTimestampError</span><span class="p">(</span><span class="n">ClefFilterError</span><span class="p">):</span>
+</span><span data-line="76"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when timestamp parsing fails&quot;&quot;&quot;</span>
+</span><span data-line="77">
+</span><span data-line="78">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">original_error</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="79">        <span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">timestamp</span>
+</span><span data-line="80">        <span class="bp">self</span><span class="o">.</span><span class="n">original_error</span> <span class="o">=</span> <span class="n">original_error</span>
+</span><span data-line="81">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid timestamp format &#39;</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">original_error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+</span><span data-line="82">
+</span><span data-line="83">
+<div class="viewcode-block" id="ClefEventFilterBuilder">
+<a class="viewcode-back" href="../../pyclef.html#pyclef.filter.ClefEventFilterBuilder">[docs]</a>
+</span><span data-line="84"><span class="k">class</span><span class="w"> </span><span class="nc">ClefEventFilterBuilder</span><span class="p">:</span>
+</span><span data-line="85"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="86"><span class="sd">    Builder for constructing and applying filters to CLEF event collections.</span>
+</span><span data-line="87"><span class="sd">    </span>
+</span><span data-line="88"><span class="sd">    This class implements the builder pattern, allowing you to chain multiple</span>
+</span><span data-line="89"><span class="sd">    filter criteria before executing the filter operation. All filter methods</span>
+</span><span data-line="90"><span class="sd">    return self to enable fluent method chaining.</span>
+</span><span data-line="91"><span class="sd">    </span>
+</span><span data-line="92"><span class="sd">    Attributes:</span>
+</span><span data-line="93"><span class="sd">        events (ClefEventCollection): The collection of events to filter.</span>
+</span><span data-line="94"><span class="sd">    </span>
+</span><span data-line="95"><span class="sd">    Example:</span>
+</span><span data-line="96"><span class="sd">        &gt;&gt;&gt; from pyclef import ClefParser</span>
+</span><span data-line="97"><span class="sd">        &gt;&gt;&gt; parser = ClefParser(&#39;log.clef&#39;)</span>
+</span><span data-line="98"><span class="sd">        &gt;&gt;&gt; events = parser.parse()</span>
+</span><span data-line="99"><span class="sd">        &gt;&gt;&gt; </span>
+</span><span data-line="100"><span class="sd">        &gt;&gt;&gt; # Filter errors from the last hour</span>
+</span><span data-line="101"><span class="sd">        &gt;&gt;&gt; recent_errors = parser.event_filter(events)\</span>
+</span><span data-line="102"><span class="sd">        ...     .level(&#39;Error&#39;)\</span>
+</span><span data-line="103"><span class="sd">        ...     .start_time(&#39;2026-01-24T10:00:00Z&#39;)\</span>
+</span><span data-line="104"><span class="sd">        ...     .filter()</span>
+</span><span data-line="105"><span class="sd">        &gt;&gt;&gt; </span>
+</span><span data-line="106"><span class="sd">        &gt;&gt;&gt; # Filter by message pattern and custom field</span>
+</span><span data-line="107"><span class="sd">        &gt;&gt;&gt; db_errors = parser.event_filter(events)\</span>
+</span><span data-line="108"><span class="sd">        ...     .msg_regex(r&#39;database.*failed&#39;)\</span>
+</span><span data-line="109"><span class="sd">        ...     .user_fields({&#39;Component&#39;: &#39;Database&#39;})\</span>
+</span><span data-line="110"><span class="sd">        ...     .filter()</span>
+</span><span data-line="111"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="112">
+</span><span data-line="113">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">events</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ClefEventCollection</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="114"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="115"><span class="sd">        Initialize the filter builder with an event collection.</span>
+</span><span data-line="116">
+</span><span data-line="117"><span class="sd">        Args:</span>
+</span><span data-line="118"><span class="sd">            events: The collection of CLEF events to be filtered.</span>
+</span><span data-line="119">
+</span><span data-line="120"><span class="sd">        Raises:</span>
+</span><span data-line="121"><span class="sd">            ValueError: If events is None.</span>
+</span><span data-line="122"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="123">        <span class="k">if</span> <span class="n">events</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="124">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;events cannot be None&quot;</span><span class="p">)</span>
+</span><span data-line="125">
+</span><span data-line="126">        <span class="bp">self</span><span class="o">.</span><span class="n">events</span> <span class="o">=</span> <span class="n">events</span>
+</span><span data-line="127">        <span class="bp">self</span><span class="o">.</span><span class="n">_start_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="128">        <span class="bp">self</span><span class="o">.</span><span class="n">_end_time</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="129">        <span class="bp">self</span><span class="o">.</span><span class="n">_level</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="130">        <span class="bp">self</span><span class="o">.</span><span class="n">_msg_pattern</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="131">        <span class="bp">self</span><span class="o">.</span><span class="n">_msg_template_pattern</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="132">        <span class="bp">self</span><span class="o">.</span><span class="n">_user_fields</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="133">        <span class="bp">self</span><span class="o">.</span><span class="n">_eventid</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="134">        <span class="bp">self</span><span class="o">.</span><span class="n">_exception_pattern</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="135">        <span class="bp">self</span><span class="o">.</span><span class="n">_renderings_pattern</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Pattern</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="136">
+<div class="viewcode-block" id="ClefEventFilterBuilder.start_time">
+<a class="viewcode-back" href="../../pyclef.html#pyclef.filter.ClefEventFilterBuilder.start_time">[docs]</a>
+</span><span data-line="137">    <span class="k">def</span><span class="w"> </span><span class="nf">start_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ClefEventFilterBuilder&quot;</span><span class="p">:</span>
+</span><span data-line="138"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="139"><span class="sd">        Filter events that occurred on or after the specified timestamp.</span>
+</span><span data-line="140">
+</span><span data-line="141"><span class="sd">        Args:</span>
+</span><span data-line="142"><span class="sd">            value: ISO 8601 formatted timestamp string (e.g., &#39;2026-01-24T10:00:00Z&#39;).</span>
+</span><span data-line="143">
+</span><span data-line="144"><span class="sd">        Returns:</span>
+</span><span data-line="145"><span class="sd">            Self for method chaining.</span>
+</span><span data-line="146">
+</span><span data-line="147"><span class="sd">        Raises:</span>
+</span><span data-line="148"><span class="sd">            ValueError: If value is None or empty.</span>
+</span><span data-line="149"><span class="sd">            ClefInvalidTimestampError: If timestamp format is invalid.</span>
+</span><span data-line="150">
+</span><span data-line="151"><span class="sd">        Example:</span>
+</span><span data-line="152"><span class="sd">            &gt;&gt;&gt; builder.start_time(&#39;2026-01-24T00:00:00Z&#39;)</span>
+</span><span data-line="153"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="154">        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+</span><span data-line="155">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;start_time cannot be None or empty&quot;</span><span class="p">)</span>
+</span><span data-line="156">
+</span><span data-line="157">        <span class="c1"># Validate timestamp format</span>
+</span><span data-line="158">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="159">            <span class="bp">self</span><span class="o">.</span><span class="n">_parse_time</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span data-line="160">        <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="161">            <span class="k">raise</span> <span class="n">ClefInvalidTimestampError</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+</span><span data-line="162">
+</span><span data-line="163">        <span class="bp">self</span><span class="o">.</span><span class="n">_start_time</span> <span class="o">=</span> <span class="n">value</span>
+</span><span data-line="164">        <span class="k">return</span> <span class="bp">self</span></div>
+
+</span><span data-line="165">
+<div class="viewcode-block" id="ClefEventFilterBuilder.end_time">
+<a class="viewcode-back" href="../../pyclef.html#pyclef.filter.ClefEventFilterBuilder.end_time">[docs]</a>
+</span><span data-line="166">    <span class="k">def</span><span class="w"> </span><span class="nf">end_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ClefEventFilterBuilder&quot;</span><span class="p">:</span>
+</span><span data-line="167"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="168"><span class="sd">        Filter events that occurred on or before the specified timestamp.</span>
+</span><span data-line="169">
+</span><span data-line="170"><span class="sd">        Args:</span>
+</span><span data-line="171"><span class="sd">            value: ISO 8601 formatted timestamp string (e.g., &#39;2026-01-24T23:59:59Z&#39;).</span>
+</span><span data-line="172">
+</span><span data-line="173"><span class="sd">        Returns:</span>
+</span><span data-line="174"><span class="sd">            Self for method chaining.</span>
+</span><span data-line="175">
+</span><span data-line="176"><span class="sd">        Raises:</span>
+</span><span data-line="177"><span class="sd">            ValueError: If value is None or empty.</span>
+</span><span data-line="178"><span class="sd">            ClefInvalidTimestampError: If timestamp format is invalid.</span>
+</span><span data-line="179">
+</span><span data-line="180"><span class="sd">        Example:</span>
+</span><span data-line="181"><span class="sd">            &gt;&gt;&gt; builder.end_time(&#39;2026-01-24T23:59:59Z&#39;)</span>
+</span><span data-line="182"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="183">        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+</span><span data-line="184">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;end_time cannot be None or empty&quot;</span><span class="p">)</span>
+</span><span data-line="185">
+</span><span data-line="186">        <span class="c1"># Validate timestamp format</span>
+</span><span data-line="187">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="188">            <span class="bp">self</span><span class="o">.</span><span class="n">_parse_time</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span data-line="189">        <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="190">            <span class="k">raise</span> <span class="n">ClefInvalidTimestampError</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+</span><span data-line="191">
+</span><span data-line="192">        <span class="bp">self</span><span class="o">.</span><span class="n">_end_time</span> <span class="o">=</span> <span class="n">value</span>
+</span><span data-line="193">        <span class="k">return</span> <span class="bp">self</span></div>
+
+</span><span data-line="194">
+<div class="viewcode-block" id="ClefEventFilterBuilder.level">
+<a class="viewcode-back" href="../../pyclef.html#pyclef.filter.ClefEventFilterBuilder.level">[docs]</a>
+</span><span data-line="195">    <span class="k">def</span><span class="w"> </span><span class="nf">level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ClefEventFilterBuilder&quot;</span><span class="p">:</span>
+</span><span data-line="196"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="197"><span class="sd">        Filter events by log level.</span>
+</span><span data-line="198">
+</span><span data-line="199"><span class="sd">        Args:</span>
+</span><span data-line="200"><span class="sd">            value: Log level string (e.g., &#39;Error&#39;, &#39;Warning&#39;, &#39;Information&#39;, &#39;Debug&#39;).</span>
+</span><span data-line="201">
+</span><span data-line="202"><span class="sd">        Returns:</span>
+</span><span data-line="203"><span class="sd">            Self for method chaining.</span>
+</span><span data-line="204">
+</span><span data-line="205"><span class="sd">        Raises:</span>
+</span><span data-line="206"><span class="sd">            ValueError: If value is None or empty.</span>
+</span><span data-line="207">
+</span><span data-line="208"><span class="sd">        Example:</span>
+</span><span data-line="209"><span class="sd">            &gt;&gt;&gt; builder.level(&#39;Error&#39;)</span>
+</span><span data-line="210"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="211">        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+</span><span data-line="212">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;level cannot be None or empty&quot;</span><span class="p">)</span>
+</span><span data-line="213">
+</span><span data-line="214">        <span class="bp">self</span><span class="o">.</span><span class="n">_level</span> <span class="o">=</span> <span class="n">value</span>
+</span><span data-line="215">        <span class="k">return</span> <span class="bp">self</span></div>
+
+</span><span data-line="216">
+<div class="viewcode-block" id="ClefEventFilterBuilder.msg_regex">
+<a class="viewcode-back" href="../../pyclef.html#pyclef.filter.ClefEventFilterBuilder.msg_regex">[docs]</a>
+</span><span data-line="217">    <span class="k">def</span><span class="w"> </span><span class="nf">msg_regex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ClefEventFilterBuilder&quot;</span><span class="p">:</span>
+</span><span data-line="218"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="219"><span class="sd">        Filter messages using a regular expression pattern.</span>
+</span><span data-line="220">
+</span><span data-line="221"><span class="sd">        Args:</span>
+</span><span data-line="222"><span class="sd">            value: Regular expression pattern string.</span>
+</span><span data-line="223">
+</span><span data-line="224"><span class="sd">        Returns:</span>
+</span><span data-line="225"><span class="sd">            Self for method chaining.</span>
+</span><span data-line="226">
+</span><span data-line="227"><span class="sd">        Raises:</span>
+</span><span data-line="228"><span class="sd">            ValueError: If the regex pattern is invalid or empty.</span>
+</span><span data-line="229">
+</span><span data-line="230"><span class="sd">        Example:</span>
+</span><span data-line="231"><span class="sd">            &gt;&gt;&gt; builder.msg_regex(r&#39;failed.*timeout&#39;)</span>
+</span><span data-line="232"><span class="sd">            &gt;&gt;&gt; builder.msg_regex(r&#39;^ERROR: &#39;)</span>
+</span><span data-line="233"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="234">        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+</span><span data-line="235">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;msg_regex pattern cannot be None or empty&quot;</span><span class="p">)</span>
+</span><span data-line="236">
+</span><span data-line="237">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="238">            <span class="bp">self</span><span class="o">.</span><span class="n">_msg_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span data-line="239">        <span class="k">except</span> <span class="n">re</span><span class="o">.</span><span class="n">error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="240">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid message regex pattern &#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+</span><span data-line="241">        <span class="k">return</span> <span class="bp">self</span></div>
+
+</span><span data-line="242">
+<div class="viewcode-block" id="ClefEventFilterBuilder.msg_template_regex">
+<a class="viewcode-back" href="../../pyclef.html#pyclef.filter.ClefEventFilterBuilder.msg_template_regex">[docs]</a>
+</span><span data-line="243">    <span class="k">def</span><span class="w"> </span><span class="nf">msg_template_regex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ClefEventFilterBuilder&quot;</span><span class="p">:</span>
+</span><span data-line="244"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="245"><span class="sd">        Filter message templates using a regular expression pattern.</span>
+</span><span data-line="246">
+</span><span data-line="247"><span class="sd">        Message templates are the structured logging templates before</span>
+</span><span data-line="248"><span class="sd">        parameter substitution (e.g., &quot;User {UserId} logged in from {IpAddress}&quot;).</span>
+</span><span data-line="249">
+</span><span data-line="250"><span class="sd">        Args:</span>
+</span><span data-line="251"><span class="sd">            value: Regular expression pattern string.</span>
+</span><span data-line="252">
+</span><span data-line="253"><span class="sd">        Returns:</span>
+</span><span data-line="254"><span class="sd">            Self for method chaining.</span>
+</span><span data-line="255">
+</span><span data-line="256"><span class="sd">        Raises:</span>
+</span><span data-line="257"><span class="sd">            ValueError: If the regex pattern is invalid or empty.</span>
+</span><span data-line="258">
+</span><span data-line="259"><span class="sd">        Example:</span>
+</span><span data-line="260"><span class="sd">            &gt;&gt;&gt; builder.msg_template_regex(r&#39;User .* logged in&#39;)</span>
+</span><span data-line="261"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="262">        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+</span><span data-line="263">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;msg_template_regex pattern cannot be None or empty&quot;</span><span class="p">)</span>
+</span><span data-line="264">
+</span><span data-line="265">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="266">            <span class="bp">self</span><span class="o">.</span><span class="n">_msg_template_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span data-line="267">        <span class="k">except</span> <span class="n">re</span><span class="o">.</span><span class="n">error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="268">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+</span><span data-line="269">                <span class="sa">f</span><span class="s2">&quot;Invalid message template regex pattern &#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span data-line="270">            <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+</span><span data-line="271">        <span class="k">return</span> <span class="bp">self</span></div>
+
+</span><span data-line="272">
+<div class="viewcode-block" id="ClefEventFilterBuilder.user_fields">
+<a class="viewcode-back" href="../../pyclef.html#pyclef.filter.ClefEventFilterBuilder.user_fields">[docs]</a>
+</span><span data-line="273">    <span class="k">def</span><span class="w"> </span><span class="nf">user_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="s2">&quot;ClefEventFilterBuilder&quot;</span><span class="p">:</span>
+</span><span data-line="274"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="275"><span class="sd">        Filter events by custom user-defined fields.</span>
+</span><span data-line="276">
+</span><span data-line="277"><span class="sd">        Only events that have ALL specified field key-value pairs will be included.</span>
+</span><span data-line="278">
+</span><span data-line="279"><span class="sd">        Args:</span>
+</span><span data-line="280"><span class="sd">            value: Dictionary of field names and their expected values.</span>
+</span><span data-line="281">
+</span><span data-line="282"><span class="sd">        Returns:</span>
+</span><span data-line="283"><span class="sd">            Self for method chaining.</span>
+</span><span data-line="284">
+</span><span data-line="285"><span class="sd">        Raises:</span>
+</span><span data-line="286"><span class="sd">            ValueError: If value is None or empty dictionary.</span>
+</span><span data-line="287">
+</span><span data-line="288"><span class="sd">        Example:</span>
+</span><span data-line="289"><span class="sd">            &gt;&gt;&gt; builder.user_fields({&#39;Environment&#39;: &#39;Production&#39;, &#39;Service&#39;: &#39;API&#39;})</span>
+</span><span data-line="290"><span class="sd">            &gt;&gt;&gt; builder.user_fields({&#39;UserId&#39;: 12345})</span>
+</span><span data-line="291"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="292">        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="293">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;user_fields cannot be None&quot;</span><span class="p">)</span>
+</span><span data-line="294">        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+</span><span data-line="295">            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+</span><span data-line="296">                <span class="s2">&quot;user_fields is empty, no filtering will be applied&quot;</span><span class="p">,</span> <span class="ne">UserWarning</span>
+</span><span data-line="297">            <span class="p">)</span>
+</span><span data-line="298">
+</span><span data-line="299">        <span class="bp">self</span><span class="o">.</span><span class="n">_user_fields</span> <span class="o">=</span> <span class="n">value</span>
+</span><span data-line="300">        <span class="k">return</span> <span class="bp">self</span></div>
+
+</span><span data-line="301">
+<div class="viewcode-block" id="ClefEventFilterBuilder.eventid">
+<a class="viewcode-back" href="../../pyclef.html#pyclef.filter.ClefEventFilterBuilder.eventid">[docs]</a>
+</span><span data-line="302">    <span class="k">def</span><span class="w"> </span><span class="nf">eventid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ClefEventFilterBuilder&quot;</span><span class="p">:</span>
+</span><span data-line="303"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="304"><span class="sd">        Filter events by event ID.</span>
+</span><span data-line="305">
+</span><span data-line="306"><span class="sd">        Args:</span>
+</span><span data-line="307"><span class="sd">            value: The event ID to filter by (can be string, int, or other types).</span>
+</span><span data-line="308">
+</span><span data-line="309"><span class="sd">        Returns:</span>
+</span><span data-line="310"><span class="sd">            Self for method chaining.</span>
+</span><span data-line="311">
+</span><span data-line="312"><span class="sd">        Example:</span>
+</span><span data-line="313"><span class="sd">            &gt;&gt;&gt; builder.eventid(&#39;evt_12345&#39;)</span>
+</span><span data-line="314"><span class="sd">            &gt;&gt;&gt; builder.eventid(42)</span>
+</span><span data-line="315"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="316">        <span class="bp">self</span><span class="o">.</span><span class="n">_eventid</span> <span class="o">=</span> <span class="n">value</span>
+</span><span data-line="317">        <span class="k">return</span> <span class="bp">self</span></div>
+
+</span><span data-line="318">
+<div class="viewcode-block" id="ClefEventFilterBuilder.exception_regex">
+<a class="viewcode-back" href="../../pyclef.html#pyclef.filter.ClefEventFilterBuilder.exception_regex">[docs]</a>
+</span><span data-line="319">    <span class="k">def</span><span class="w"> </span><span class="nf">exception_regex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ClefEventFilterBuilder&quot;</span><span class="p">:</span>
+</span><span data-line="320"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="321"><span class="sd">        Filter events by exception information using a regular expression.</span>
+</span><span data-line="322">
+</span><span data-line="323"><span class="sd">        Searches the exception stack trace or error message.</span>
+</span><span data-line="324">
+</span><span data-line="325"><span class="sd">        Args:</span>
+</span><span data-line="326"><span class="sd">            value: Regular expression pattern string.</span>
+</span><span data-line="327">
+</span><span data-line="328"><span class="sd">        Returns:</span>
+</span><span data-line="329"><span class="sd">            Self for method chaining.</span>
+</span><span data-line="330">
+</span><span data-line="331"><span class="sd">        Raises:</span>
+</span><span data-line="332"><span class="sd">            ValueError: If the regex pattern is invalid or empty.</span>
+</span><span data-line="333">
+</span><span data-line="334"><span class="sd">        Example:</span>
+</span><span data-line="335"><span class="sd">            &gt;&gt;&gt; builder.exception_regex(r&#39;NullPointerException&#39;)</span>
+</span><span data-line="336"><span class="sd">            &gt;&gt;&gt; builder.exception_regex(r&#39;at com\\.example\\..*&#39;)</span>
+</span><span data-line="337"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="338">        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+</span><span data-line="339">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;exception_regex pattern cannot be None or empty&quot;</span><span class="p">)</span>
+</span><span data-line="340">
+</span><span data-line="341">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="342">            <span class="bp">self</span><span class="o">.</span><span class="n">_exception_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span data-line="343">        <span class="k">except</span> <span class="n">re</span><span class="o">.</span><span class="n">error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="344">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid exception regex pattern &#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+</span><span data-line="345">        <span class="k">return</span> <span class="bp">self</span></div>
+
+</span><span data-line="346">
+<div class="viewcode-block" id="ClefEventFilterBuilder.renderings_regex">
+<a class="viewcode-back" href="../../pyclef.html#pyclef.filter.ClefEventFilterBuilder.renderings_regex">[docs]</a>
+</span><span data-line="347">    <span class="k">def</span><span class="w"> </span><span class="nf">renderings_regex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;ClefEventFilterBuilder&quot;</span><span class="p">:</span>
+</span><span data-line="348"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="349"><span class="sd">        Filter events by renderings field using a regular expression.</span>
+</span><span data-line="350">
+</span><span data-line="351"><span class="sd">        Renderings contain alternative representations of log message parameters.</span>
+</span><span data-line="352">
+</span><span data-line="353"><span class="sd">        Args:</span>
+</span><span data-line="354"><span class="sd">            value: Regular expression pattern string.</span>
+</span><span data-line="355">
+</span><span data-line="356"><span class="sd">        Returns:</span>
+</span><span data-line="357"><span class="sd">            Self for method chaining.</span>
+</span><span data-line="358">
+</span><span data-line="359"><span class="sd">        Raises:</span>
+</span><span data-line="360"><span class="sd">            ValueError: If the regex pattern is invalid or empty.</span>
+</span><span data-line="361">
+</span><span data-line="362"><span class="sd">        Example:</span>
+</span><span data-line="363"><span class="sd">            &gt;&gt;&gt; builder.renderings_regex(r&#39;format.*json&#39;)</span>
+</span><span data-line="364"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="365">        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+</span><span data-line="366">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;renderings_regex pattern cannot be None or empty&quot;</span><span class="p">)</span>
+</span><span data-line="367">
+</span><span data-line="368">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="369">            <span class="bp">self</span><span class="o">.</span><span class="n">_renderings_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</span><span data-line="370">        <span class="k">except</span> <span class="n">re</span><span class="o">.</span><span class="n">error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="371">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid renderings regex pattern &#39;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+</span><span data-line="372">        <span class="k">return</span> <span class="bp">self</span></div>
+
+</span><span data-line="373">
+</span><span data-line="374">    <span class="nd">@staticmethod</span>
+</span><span data-line="375">    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_time</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="p">:</span>
+</span><span data-line="376"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="377"><span class="sd">        Parse ISO 8601 timestamp string to datetime.</span>
+</span><span data-line="378">
+</span><span data-line="379"><span class="sd">        Args:</span>
+</span><span data-line="380"><span class="sd">            t: ISO 8601 formatted timestamp string.</span>
+</span><span data-line="381">
+</span><span data-line="382"><span class="sd">        Returns:</span>
+</span><span data-line="383"><span class="sd">            Parsed datetime object.</span>
+</span><span data-line="384">
+</span><span data-line="385"><span class="sd">        Raises:</span>
+</span><span data-line="386"><span class="sd">            ValueError: If timestamp format is invalid.</span>
+</span><span data-line="387"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="388">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="389">            <span class="k">return</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="s2">&quot;+00:00&quot;</span><span class="p">))</span>
+</span><span data-line="390">        <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="391">            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid timestamp format: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+</span><span data-line="392">
+<div class="viewcode-block" id="ClefEventFilterBuilder.filter">
+<a class="viewcode-back" href="../../pyclef.html#pyclef.filter.ClefEventFilterBuilder.filter">[docs]</a>
+</span><span data-line="393">    <span class="k">def</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ClefEventCollection</span><span class="p">:</span>
+</span><span data-line="394"><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="395"><span class="sd">        Execute all configured filters and return the filtered event collection.</span>
+</span><span data-line="396"><span class="sd">        </span>
+</span><span data-line="397"><span class="sd">        This method applies all previously configured filter criteria in sequence.</span>
+</span><span data-line="398"><span class="sd">        An event must pass ALL filter conditions to be included in the result.</span>
+</span><span data-line="399"><span class="sd">        </span>
+</span><span data-line="400"><span class="sd">        Returns:</span>
+</span><span data-line="401"><span class="sd">            A new ClefEventCollection containing only the events that match</span>
+</span><span data-line="402"><span class="sd">            all filter criteria.</span>
+</span><span data-line="403"><span class="sd">        </span>
+</span><span data-line="404"><span class="sd">        Raises:</span>
+</span><span data-line="405"><span class="sd">            ClefFilterError: If filtering operation encounters an error.</span>
+</span><span data-line="406"><span class="sd">            ClefInvalidTimestampError: If event timestamps cannot be parsed.</span>
+</span><span data-line="407"><span class="sd">        </span>
+</span><span data-line="408"><span class="sd">        Example:</span>
+</span><span data-line="409"><span class="sd">            &gt;&gt;&gt; filtered = builder\</span>
+</span><span data-line="410"><span class="sd">            ...     .level(&#39;Error&#39;)\</span>
+</span><span data-line="411"><span class="sd">            ...     .start_time(&#39;2026-01-24T00:00:00Z&#39;)\</span>
+</span><span data-line="412"><span class="sd">            ...     .msg_regex(r&#39;timeout&#39;)\</span>
+</span><span data-line="413"><span class="sd">            ...     .filter()</span>
+</span><span data-line="414"><span class="sd">            &gt;&gt;&gt; print(f&quot;Found {len(filtered)} matching events&quot;)</span>
+</span><span data-line="415"><span class="sd">        </span>
+</span><span data-line="416"><span class="sd">        Notes:</span>
+</span><span data-line="417"><span class="sd">            - Events without timestamps are excluded from time-based filters</span>
+</span><span data-line="418"><span class="sd">            - Empty or None values are converted to empty strings for pattern matching</span>
+</span><span data-line="419"><span class="sd">            - All filters use AND logic (events must match all conditions)</span>
+</span><span data-line="420"><span class="sd">            - Malformed event data will be skipped with a warning</span>
+</span><span data-line="421"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span data-line="422">        <span class="n">filtered</span> <span class="o">=</span> <span class="n">ClefEventCollection</span><span class="p">()</span>
+</span><span data-line="423">        <span class="n">skipped_count</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span data-line="424">
+</span><span data-line="425">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="426">            <span class="c1"># Validate time range if both are set</span>
+</span><span data-line="427">            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_start_time</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_end_time</span><span class="p">:</span>
+</span><span data-line="428">                <span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_start_time</span><span class="p">)</span>
+</span><span data-line="429">                <span class="n">end</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_end_time</span><span class="p">)</span>
+</span><span data-line="430">                <span class="k">if</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="n">end</span><span class="p">:</span>
+</span><span data-line="431">                    <span class="k">raise</span> <span class="n">ClefFilterError</span><span class="p">(</span>
+</span><span data-line="432">                        <span class="sa">f</span><span class="s2">&quot;start_time (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_start_time</span><span class="si">}</span><span class="s2">) is after end_time (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_end_time</span><span class="si">}</span><span class="s2">)&quot;</span>
+</span><span data-line="433">                    <span class="p">)</span>
+</span><span data-line="434">
+</span><span data-line="435">            <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="p">:</span>
+</span><span data-line="436">                <span class="k">try</span><span class="p">:</span>
+</span><span data-line="437">                    <span class="c1"># Time-based filtering</span>
+</span><span data-line="438">                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_start_time</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_end_time</span><span class="p">:</span>
+</span><span data-line="439">                        <span class="n">event_time</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">reified</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ClefField</span><span class="o">.</span><span class="n">TIMESTAMP</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span><span data-line="440">                        <span class="k">if</span> <span class="ow">not</span> <span class="n">event_time</span><span class="p">:</span>
+</span><span data-line="441">                            <span class="k">continue</span>  <span class="c1"># Skip events without timestamp</span>
+</span><span data-line="442">
+</span><span data-line="443">                        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="444">                            <span class="n">event_dt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_time</span><span class="p">(</span><span class="n">event_time</span><span class="p">)</span>
+</span><span data-line="445">
+</span><span data-line="446">                            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_start_time</span><span class="p">:</span>
+</span><span data-line="447">                                <span class="n">start_dt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_start_time</span><span class="p">)</span>
+</span><span data-line="448">                                <span class="k">if</span> <span class="n">event_dt</span> <span class="o">&lt;</span> <span class="n">start_dt</span><span class="p">:</span>
+</span><span data-line="449">                                    <span class="k">continue</span>
+</span><span data-line="450">
+</span><span data-line="451">                            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_end_time</span><span class="p">:</span>
+</span><span data-line="452">                                <span class="n">end_dt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_time</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_end_time</span><span class="p">)</span>
+</span><span data-line="453">                                <span class="k">if</span> <span class="n">event_dt</span> <span class="o">&gt;</span> <span class="n">end_dt</span><span class="p">:</span>
+</span><span data-line="454">                                    <span class="k">continue</span>
+</span><span data-line="455">                        <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="456">                            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+</span><span data-line="457">                                <span class="sa">f</span><span class="s2">&quot;Skipping event with invalid timestamp &#39;</span><span class="si">{</span><span class="n">event_time</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+</span><span data-line="458">                                <span class="ne">UserWarning</span><span class="p">,</span>
+</span><span data-line="459">                            <span class="p">)</span>
+</span><span data-line="460">                            <span class="n">skipped_count</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span data-line="461">                            <span class="k">continue</span>
+</span><span data-line="462">
+</span><span data-line="463">                    <span class="c1"># Level filtering</span>
+</span><span data-line="464">                    <span class="k">if</span> <span class="p">(</span>
+</span><span data-line="465">                        <span class="bp">self</span><span class="o">.</span><span class="n">_level</span>
+</span><span data-line="466">                        <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">reified</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ClefField</span><span class="o">.</span><span class="n">LEVEL</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_level</span>
+</span><span data-line="467">                    <span class="p">):</span>
+</span><span data-line="468">                        <span class="k">continue</span>
+</span><span data-line="469">
+</span><span data-line="470">                    <span class="c1"># Message pattern filtering</span>
+</span><span data-line="471">                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_msg_pattern</span><span class="p">:</span>
+</span><span data-line="472">                        <span class="n">msg</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">reified</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ClefField</span><span class="o">.</span><span class="n">MESSAGE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+</span><span data-line="473">                        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="474">                            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_msg_pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="p">)):</span>
+</span><span data-line="475">                                <span class="k">continue</span>
+</span><span data-line="476">                        <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+</span><span data-line="477">                            <span class="n">skipped_count</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span data-line="478">                            <span class="k">continue</span>
+</span><span data-line="479">
+</span><span data-line="480">                    <span class="c1"># Message template pattern filtering</span>
+</span><span data-line="481">                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_msg_template_pattern</span><span class="p">:</span>
+</span><span data-line="482">                        <span class="n">msg_template</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">reified</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+</span><span data-line="483">                            <span class="n">ClefField</span><span class="o">.</span><span class="n">MESSAGE_TEMPLATE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;&quot;</span>
+</span><span data-line="484">                        <span class="p">)</span>
+</span><span data-line="485">                        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="486">                            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_msg_template_pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">msg_template</span><span class="p">)):</span>
+</span><span data-line="487">                                <span class="k">continue</span>
+</span><span data-line="488">                        <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+</span><span data-line="489">                            <span class="n">skipped_count</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span data-line="490">                            <span class="k">continue</span>
+</span><span data-line="491">
+</span><span data-line="492">                    <span class="c1"># Exception pattern filtering</span>
+</span><span data-line="493">                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exception_pattern</span><span class="p">:</span>
+</span><span data-line="494">                        <span class="n">exc</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">reified</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ClefField</span><span class="o">.</span><span class="n">EXCEPTION</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+</span><span data-line="495">                        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="496">                            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exception_pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">exc</span><span class="p">):</span>
+</span><span data-line="497">                                <span class="k">continue</span>
+</span><span data-line="498">                        <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+</span><span data-line="499">                            <span class="n">skipped_count</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span data-line="500">                            <span class="k">continue</span>
+</span><span data-line="501">
+</span><span data-line="502">                    <span class="c1"># Renderings pattern filtering</span>
+</span><span data-line="503">                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_renderings_pattern</span><span class="p">:</span>
+</span><span data-line="504">                        <span class="n">rend</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">reified</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ClefField</span><span class="o">.</span><span class="n">RENDERINGS</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+</span><span data-line="505">                        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="506">                            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_renderings_pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">rend</span><span class="p">):</span>
+</span><span data-line="507">                                <span class="k">continue</span>
+</span><span data-line="508">                        <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+</span><span data-line="509">                            <span class="n">skipped_count</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span data-line="510">                            <span class="k">continue</span>
+</span><span data-line="511">
+</span><span data-line="512">                    <span class="c1"># User fields filtering</span>
+</span><span data-line="513">                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_user_fields</span><span class="p">:</span>
+</span><span data-line="514">                        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="515">                            <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span>
+</span><span data-line="516">                                <span class="n">event</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="n">v</span>
+</span><span data-line="517">                                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_user_fields</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span><span data-line="518">                            <span class="p">):</span>
+</span><span data-line="519">                                <span class="k">continue</span>
+</span><span data-line="520">                        <span class="k">except</span> <span class="p">(</span><span class="ne">AttributeError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+</span><span data-line="521">                            <span class="n">skipped_count</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span data-line="522">                            <span class="k">continue</span>
+</span><span data-line="523">
+</span><span data-line="524">                    <span class="c1"># Event ID filtering</span>
+</span><span data-line="525">                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eventid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="526">                        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">reified</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ClefField</span><span class="o">.</span><span class="n">EVENT_ID</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eventid</span><span class="p">:</span>
+</span><span data-line="527">                            <span class="k">continue</span>
+</span><span data-line="528">
+</span><span data-line="529">                    <span class="c1"># Event passed all filters</span>
+</span><span data-line="530">                    <span class="n">filtered</span><span class="o">.</span><span class="n">add_event</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+</span><span data-line="531">
+</span><span data-line="532">                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="533">                    <span class="c1"># Catch any unexpected errors and skip the event</span>
+</span><span data-line="534">                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+</span><span data-line="535">                        <span class="sa">f</span><span class="s2">&quot;Unexpected error filtering event: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">. Event skipped.&quot;</span><span class="p">,</span>
+</span><span data-line="536">                        <span class="ne">UserWarning</span><span class="p">,</span>
+</span><span data-line="537">                    <span class="p">)</span>
+</span><span data-line="538">                    <span class="n">skipped_count</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span data-line="539">                    <span class="k">continue</span>
+</span><span data-line="540">
+</span><span data-line="541">            <span class="c1"># Warn if many events were skipped</span>
+</span><span data-line="542">            <span class="k">if</span> <span class="n">skipped_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span data-line="543">                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+</span><span data-line="544">                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">skipped_count</span><span class="si">}</span><span class="s2"> event(s) were skipped due to malformed data&quot;</span><span class="p">,</span>
+</span><span data-line="545">                    <span class="ne">UserWarning</span><span class="p">,</span>
+</span><span data-line="546">                <span class="p">)</span>
+</span><span data-line="547">
+</span><span data-line="548">            <span class="k">return</span> <span class="n">filtered</span>
+</span><span data-line="549">
+</span><span data-line="550">        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="551">            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="p">(</span><span class="n">ClefFilterError</span><span class="p">,</span> <span class="n">ClefInvalidTimestampError</span><span class="p">)):</span>
+</span><span data-line="552">                <span class="k">raise</span>
+</span><span data-line="553">            <span class="k">raise</span> <span class="n">ClefFilterError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Filter operation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span></div>
+</div>
+
+</span></pre></div>
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Shuvo Paul</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/shibuya.js?v=cac61aee"></script></body>
+</html>

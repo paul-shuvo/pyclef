@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>pyclef.event - pyclef documentation</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=44020203" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="pyclef.event"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../index.html">
+      
+      
+      <strong>pyclef</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../pyclef.html">pyclef API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">pyclef</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">Module code</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">pyclef.event</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <h1>Source code for pyclef.event</h1><div class="highlight"><pre>
+<span></span><span data-line="1"><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="2"><span class="sd">CLEF Event Representation Module</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="sd">This module provides the core data structure for representing individual CLEF</span>
+</span><span data-line="5"><span class="sd">(Compact Log Event Format) log events. Each event contains both reified (standard)</span>
+</span><span data-line="6"><span class="sd">fields and user-defined custom fields.</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="sd">The ClefEvent class serves as the primary interface for accessing log event data,</span>
+</span><span data-line="9"><span class="sd">providing convenient property accessors for standard CLEF fields and direct access</span>
+</span><span data-line="10"><span class="sd">to custom application-specific fields.</span>
+</span><span data-line="11">
+</span><span data-line="12"><span class="sd">Classes:</span>
+</span><span data-line="13"><span class="sd">    ClefEvent: Dataclass representing a single CLEF log event with both standard</span>
+</span><span data-line="14"><span class="sd">        and custom fields.</span>
+</span><span data-line="15">
+</span><span data-line="16"><span class="sd">Standard CLEF Fields:</span>
+</span><span data-line="17"><span class="sd">    - @t (timestamp): ISO 8601 timestamp of the event</span>
+</span><span data-line="18"><span class="sd">    - @m (message): Rendered log message</span>
+</span><span data-line="19"><span class="sd">    - @mt (message_template): Structured message template</span>
+</span><span data-line="20"><span class="sd">    - @l (level): Log level (e.g., Information, Warning, Error)</span>
+</span><span data-line="21"><span class="sd">    - @x (exception): Exception details and stack trace</span>
+</span><span data-line="22"><span class="sd">    - @i (event_id): Unique event identifier</span>
+</span><span data-line="23"><span class="sd">    - @r (renderings): Alternative renderings of message parameters</span>
+</span><span data-line="24">
+</span><span data-line="25"><span class="sd">Example:</span>
+</span><span data-line="26"><span class="sd">    Basic event access::</span>
+</span><span data-line="27">
+</span><span data-line="28"><span class="sd">        from pyclef import ClefParser</span>
+</span><span data-line="29">
+</span><span data-line="30"><span class="sd">        parser = ClefParser(&#39;log.clef&#39;)</span>
+</span><span data-line="31"><span class="sd">        events = parser.parse()</span>
+</span><span data-line="32">
+</span><span data-line="33"><span class="sd">        for event in events:</span>
+</span><span data-line="34"><span class="sd">            print(f&quot;{event.timestamp} [{event.level}] {event.message}&quot;)</span>
+</span><span data-line="35">
+</span><span data-line="36"><span class="sd">            # Access custom fields</span>
+</span><span data-line="37"><span class="sd">            if &#39;UserId&#39; in event.user:</span>
+</span><span data-line="38"><span class="sd">                print(f&quot;User: {event.user[&#39;UserId&#39;]}&quot;)</span>
+</span><span data-line="39">
+</span><span data-line="40"><span class="sd">    Working with event data::</span>
+</span><span data-line="41">
+</span><span data-line="42"><span class="sd">        event = events[0]</span>
+</span><span data-line="43">
+</span><span data-line="44"><span class="sd">        # Standard fields via properties</span>
+</span><span data-line="45"><span class="sd">        print(event.timestamp)  # &quot;2026-01-24T10:00:00.123Z&quot;</span>
+</span><span data-line="46"><span class="sd">        print(event.level)      # &quot;Information&quot;</span>
+</span><span data-line="47"><span class="sd">        print(event.message)    # &quot;User logged in successfully&quot;</span>
+</span><span data-line="48">
+</span><span data-line="49"><span class="sd">        # Custom fields via user dictionary</span>
+</span><span data-line="50"><span class="sd">        print(event.user[&#39;Environment&#39;])  # &quot;Production&quot;</span>
+</span><span data-line="51"><span class="sd">        print(event.user[&#39;RequestId&#39;])    # &quot;abc-123&quot;</span>
+</span><span data-line="52">
+</span><span data-line="53"><span class="sd">    Converting events::</span>
+</span><span data-line="54">
+</span><span data-line="55"><span class="sd">        # To dictionary</span>
+</span><span data-line="56"><span class="sd">        event_dict = event.to_dict()</span>
+</span><span data-line="57"><span class="sd">        # {&#39;reified&#39;: {...}, &#39;user&#39;: {...}}</span>
+</span><span data-line="58">
+</span><span data-line="59"><span class="sd">        # To JSON string</span>
+</span><span data-line="60"><span class="sd">        json_str = event.to_json()</span>
+</span><span data-line="61"><span class="sd">        # &#39;{&quot;reified&quot;: {...}, &quot;user&quot;: {...}}&#39;</span>
+</span><span data-line="62">
+</span><span data-line="63"><span class="sd">    Checking for exceptions::</span>
+</span><span data-line="64">
+</span><span data-line="65"><span class="sd">        for event in events:</span>
+</span><span data-line="66"><span class="sd">            if event.level == &#39;Error&#39; and event.exception:</span>
+</span><span data-line="67"><span class="sd">                print(f&quot;Exception occurred: {event.exception}&quot;)</span>
+</span><span data-line="68">
+</span><span data-line="69"><span class="sd">Notes:</span>
+</span><span data-line="70"><span class="sd">    - All standard CLEF fields are accessed via properties returning Optional values</span>
+</span><span data-line="71"><span class="sd">    - Custom/user fields are stored in the &#39;user&#39; dictionary attribute</span>
+</span><span data-line="72"><span class="sd">    - Reified fields contain standard CLEF metadata</span>
+</span><span data-line="73"><span class="sd">    - Events are immutable once created (dataclass with frozen=False by default)</span>
+</span><span data-line="74"><span class="sd">    - None is returned for missing standard fields</span>
+</span><span data-line="75"><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="76">
+</span><span data-line="77"><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span data-line="78"><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+</span><span data-line="79"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+</span><span data-line="80">
+</span><span data-line="81"><span class="kn">from</span><span class="w"> </span><span class="nn">.fields</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefField</span>
+</span><span data-line="82">
+</span><span data-line="83">
+<div class="viewcode-block" id="ClefEvent">
+<a class="viewcode-back" href="../../pyclef.html#pyclef.event.ClefEvent">[docs]</a>
+</span><span data-line="84"><span class="nd">@dataclass</span>
+</span><span data-line="85"><span class="k">class</span><span class="w"> </span><span class="nc">ClefEvent</span><span class="p">:</span>
+</span><span data-line="86"><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span data-line="87"><span class="sd">    Represents a single CLEF (Compact Log Event Format) log event.</span>
+</span><span data-line="88">
+</span><span data-line="89"><span class="sd">    A CLEF event consists of two main components:</span>
+</span><span data-line="90"><span class="sd">    1. Reified fields: Standard CLEF fields like timestamp, level, message, etc.</span>
+</span><span data-line="91"><span class="sd">    2. User fields: Custom application-specific fields</span>
+</span><span data-line="92">
+</span><span data-line="93"><span class="sd">    This class provides property accessors for all standard CLEF fields and</span>
+</span><span data-line="94"><span class="sd">    direct dictionary access for custom fields. It implements useful methods</span>
+</span><span data-line="95"><span class="sd">    for serialization and representation.</span>
+</span><span data-line="96">
+</span><span data-line="97"><span class="sd">    Attributes:</span>
+</span><span data-line="98"><span class="sd">        reified (Dict[str, Any]): Dictionary containing standard CLEF fields</span>
+</span><span data-line="99"><span class="sd">            (those starting with @). Keys use the CLEF format (e.g., &#39;@t&#39;, &#39;@l&#39;).</span>
+</span><span data-line="100"><span class="sd">        user (Dict[str, Any]): Dictionary containing custom application-defined</span>
+</span><span data-line="101"><span class="sd">            fields. These are any fields that don&#39;t start with @ in the original</span>
+</span><span data-line="102"><span class="sd">            CLEF log entry.</span>
+</span><span data-line="103">
+</span><span data-line="104"><span class="sd">    Properties:</span>
+</span><span data-line="105"><span class="sd">        - timestamp: ISO 8601 formatted event timestamp (@t field).</span>
+</span><span data-line="106"><span class="sd">        - level: Log level string (@l field), e.g., &#39;Information&#39;, &#39;Warning&#39;, &#39;Error&#39;.</span>
+</span><span data-line="107"><span class="sd">        - message: Rendered log message (@m field) with parameters substituted.</span>
+</span><span data-line="108"><span class="sd">        - message_template: Structured message template (@mt field) before substitution.</span>
+</span><span data-line="109"><span class="sd">        - exception: Exception information (@x field) including stack trace.</span>
+</span><span data-line="110"><span class="sd">        - event_id: Event identifier (@i field), can be any type.</span>
+</span><span data-line="111"><span class="sd">        - renderings: Alternative renderings (@r field) of message parameters.</span>
+</span><span data-line="112">
+</span><span data-line="113"><span class="sd">    Example:</span>
+</span><span data-line="114"><span class="sd">        Creating an event (typically done by parser)::</span>
+</span><span data-line="115">
+</span><span data-line="116"><span class="sd">            &gt;&gt;&gt; from pyclef.event import ClefEvent</span>
+</span><span data-line="117"><span class="sd">            &gt;&gt;&gt; event = ClefEvent(reified={&#39;@t&#39;: &#39;2026-01-24T10:00:00.123Z&#39;, &#39;@l&#39;: &#39;Information&#39;, &#39;@m&#39;: &#39;User logged in successfully&#39;}, user={&#39;UserId&#39;: &#39;12345&#39;})</span>
+</span><span data-line="118"><span class="sd">            &gt;&gt;&gt; event.timestamp</span>
+</span><span data-line="119"><span class="sd">            &#39;2026-01-24T10:00:00.123Z&#39;</span>
+</span><span data-line="120"><span class="sd">            &gt;&gt;&gt; event.level</span>
+</span><span data-line="121"><span class="sd">            &#39;Information&#39;</span>
+</span><span data-line="122"><span class="sd">            &gt;&gt;&gt; event.message</span>
+</span><span data-line="123"><span class="sd">            &#39;User logged in successfully&#39;</span>
+</span><span data-line="124"><span class="sd">            &gt;&gt;&gt; event.user[&#39;UserId&#39;]</span>
+</span><span data-line="125"><span class="sd">            &#39;12345&#39;</span>
+</span><span data-line="126"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span data-line="127">
+</span><span data-line="128">    <span class="n">reified</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</span><span data-line="129">    <span class="n">user</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+</span><span data-line="130">
+</span><span data-line="131">    <span class="nd">@property</span>
+</span><span data-line="132">    <span class="k">def</span><span class="w"> </span><span class="nf">timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="133">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reified</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ClefField</span><span class="o">.</span><span class="n">TIMESTAMP</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span><span data-line="134">
+</span><span data-line="135">    <span class="nd">@property</span>
+</span><span data-line="136">    <span class="k">def</span><span class="w"> </span><span class="nf">level</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="137">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reified</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ClefField</span><span class="o">.</span><span class="n">LEVEL</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span><span data-line="138">
+</span><span data-line="139">    <span class="nd">@property</span>
+</span><span data-line="140">    <span class="k">def</span><span class="w"> </span><span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="141">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reified</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ClefField</span><span class="o">.</span><span class="n">MESSAGE</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span><span data-line="142">
+</span><span data-line="143">    <span class="nd">@property</span>
+</span><span data-line="144">    <span class="k">def</span><span class="w"> </span><span class="nf">message_template</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="145">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reified</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ClefField</span><span class="o">.</span><span class="n">MESSAGE_TEMPLATE</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span><span data-line="146">
+</span><span data-line="147">    <span class="nd">@property</span>
+</span><span data-line="148">    <span class="k">def</span><span class="w"> </span><span class="nf">exception</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span data-line="149">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reified</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ClefField</span><span class="o">.</span><span class="n">EXCEPTION</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span><span data-line="150">
+</span><span data-line="151">    <span class="nd">@property</span>
+</span><span data-line="152">    <span class="k">def</span><span class="w"> </span><span class="nf">event_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+</span><span data-line="153">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reified</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ClefField</span><span class="o">.</span><span class="n">EVENT_ID</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span><span data-line="154">
+</span><span data-line="155">    <span class="nd">@property</span>
+</span><span data-line="156">    <span class="k">def</span><span class="w"> </span><span class="nf">renderings</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+</span><span data-line="157">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reified</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ClefField</span><span class="o">.</span><span class="n">RENDERINGS</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span><span data-line="158">
+<div class="viewcode-block" id="ClefEvent.to_dict">
+<a class="viewcode-back" href="../../pyclef.html#pyclef.event.ClefEvent.to_dict">[docs]</a>
+</span><span data-line="159">    <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+</span><span data-line="160"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert event to dictionary&quot;&quot;&quot;</span>
+</span><span data-line="161">        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;reified&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">reified</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">}</span></div>
+
+</span><span data-line="162">
+<div class="viewcode-block" id="ClefEvent.to_json">
+<a class="viewcode-back" href="../../pyclef.html#pyclef.event.ClefEvent.to_json">[docs]</a>
+</span><span data-line="163">    <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span data-line="164"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert event to JSON string&quot;&quot;&quot;</span>
+</span><span data-line="165">        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span></div>
+
+</span><span data-line="166">
+</span><span data-line="167">    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span data-line="168">        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span data-line="169">
+</span><span data-line="170">    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span data-line="171">        <span class="n">msg_preview</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">message</span> <span class="k">else</span> <span class="kc">None</span>
+</span><span data-line="172">        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;ClefEvent(timestamp=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">, level=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">level</span><span class="si">}</span><span class="s2">, message=</span><span class="si">{</span><span class="n">msg_preview</span><span class="si">}</span><span class="s2">...)&quot;</span></div>
+
+</span></pre></div>
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Shuvo Paul</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../_static/shibuya.js?v=cac61aee"></script></body>
+</html>

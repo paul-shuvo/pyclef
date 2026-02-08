@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="./">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>pyclef API - pyclef documentation</title><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Welcome to pyclef’s documentation!" href="index.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=44020203" />
+    <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="pyclef API"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      
+      
+      <strong>pyclef</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading" aria-level="3"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pyclef API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-pyclef.collection">pyclef.collection module</a><ul>
+<li><a class="reference internal" href="#pyclef.collection.ClefEventCollection"><code class="docutils literal notranslate"><span class="pre">ClefEventCollection</span></code></a><ul>
+<li><a class="reference internal" href="#pyclef.collection.ClefEventCollection.add_event"><code class="docutils literal notranslate">add_event()</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.collection.ClefEventCollection.filter"><code class="docutils literal notranslate">filter()</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.collection.ClefEventCollection.get_all_events"><code class="docutils literal notranslate">get_all_events()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pyclef.event">pyclef.event module</a><ul>
+<li><a class="reference internal" href="#pyclef.event.ClefEvent"><code class="docutils literal notranslate"><span class="pre">ClefEvent</span></code></a><ul>
+<li><a class="reference internal" href="#pyclef.event.ClefEvent.reified"><code class="docutils literal notranslate">reified</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.event.ClefEvent.user"><code class="docutils literal notranslate">user</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.event.ClefEvent.event_id"><code class="docutils literal notranslate">event_id</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.event.ClefEvent.exception"><code class="docutils literal notranslate">exception</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.event.ClefEvent.level"><code class="docutils literal notranslate">level</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.event.ClefEvent.message"><code class="docutils literal notranslate">message</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.event.ClefEvent.message_template"><code class="docutils literal notranslate">message_template</span></code></a></li>
+<li><a class="reference internal" href="#id0"><code class="docutils literal notranslate">reified</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.event.ClefEvent.renderings"><code class="docutils literal notranslate">renderings</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.event.ClefEvent.timestamp"><code class="docutils literal notranslate">timestamp</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.event.ClefEvent.to_dict"><code class="docutils literal notranslate">to_dict()</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.event.ClefEvent.to_json"><code class="docutils literal notranslate">to_json()</span></code></a></li>
+<li><a class="reference internal" href="#id1"><code class="docutils literal notranslate">user</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pyclef.exceptions">pyclef.exceptions module</a><ul>
+<li><a class="reference internal" href="#pyclef.exceptions.ClefFileNotFoundError"><code class="docutils literal notranslate"><span class="pre">ClefFileNotFoundError</span></code></a><ul>
+<li><a class="reference internal" href="#pyclef.exceptions.ClefFileNotFoundError.file_path"><code class="docutils literal notranslate">file_path</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyclef.exceptions.ClefIOError"><code class="docutils literal notranslate"><span class="pre">ClefIOError</span></code></a><ul>
+<li><a class="reference internal" href="#pyclef.exceptions.ClefIOError.file_path"><code class="docutils literal notranslate">file_path</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.exceptions.ClefIOError.original_error"><code class="docutils literal notranslate">original_error</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyclef.exceptions.ClefJSONDecodeError"><code class="docutils literal notranslate"><span class="pre">ClefJSONDecodeError</span></code></a><ul>
+<li><a class="reference internal" href="#pyclef.exceptions.ClefJSONDecodeError.line_num"><code class="docutils literal notranslate">line_num</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.exceptions.ClefJSONDecodeError.line_content"><code class="docutils literal notranslate">line_content</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.exceptions.ClefJSONDecodeError.original_error"><code class="docutils literal notranslate">original_error</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyclef.exceptions.ClefParseError"><code class="docutils literal notranslate"><span class="pre">ClefParseError</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pyclef.fields">pyclef.fields module</a><ul>
+<li><a class="reference internal" href="#pyclef.fields.ClefField"><code class="docutils literal notranslate"><span class="pre">ClefField</span></code></a><ul>
+<li><a class="reference internal" href="#pyclef.fields.ClefField.EVENT_ID"><code class="docutils literal notranslate">EVENT_ID</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.fields.ClefField.EXCEPTION"><code class="docutils literal notranslate">EXCEPTION</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.fields.ClefField.LEVEL"><code class="docutils literal notranslate">LEVEL</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.fields.ClefField.MESSAGE"><code class="docutils literal notranslate">MESSAGE</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.fields.ClefField.MESSAGE_TEMPLATE"><code class="docutils literal notranslate">MESSAGE_TEMPLATE</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.fields.ClefField.RENDERINGS"><code class="docutils literal notranslate">RENDERINGS</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.fields.ClefField.TIMESTAMP"><code class="docutils literal notranslate">TIMESTAMP</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pyclef.filter">pyclef.filter module</a><ul>
+<li><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder"><code class="docutils literal notranslate"><span class="pre">ClefEventFilterBuilder</span></code></a><ul>
+<li><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder.events"><code class="docutils literal notranslate">events</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder.end_time"><code class="docutils literal notranslate">end_time()</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder.eventid"><code class="docutils literal notranslate">eventid()</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder.exception_regex"><code class="docutils literal notranslate">exception_regex()</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder.filter"><code class="docutils literal notranslate">filter()</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder.level"><code class="docutils literal notranslate">level()</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder.msg_regex"><code class="docutils literal notranslate">msg_regex()</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder.msg_template_regex"><code class="docutils literal notranslate">msg_template_regex()</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder.renderings_regex"><code class="docutils literal notranslate">renderings_regex()</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder.start_time"><code class="docutils literal notranslate">start_time()</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder.user_fields"><code class="docutils literal notranslate">user_fields()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pyclef.filter.ClefFilterError"><code class="docutils literal notranslate"><span class="pre">ClefFilterError</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.filter.ClefInvalidTimestampError"><code class="docutils literal notranslate"><span class="pre">ClefInvalidTimestampError</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pyclef.parser">pyclef.parser module</a><ul>
+<li><a class="reference internal" href="#pyclef.parser.ClefParser"><code class="docutils literal notranslate"><span class="pre">ClefParser</span></code></a><ul>
+<li><a class="reference internal" href="#pyclef.parser.ClefParser._file_path"><code class="docutils literal notranslate">_file_path</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.parser.ClefParser.REIFIED_KEYS"><code class="docutils literal notranslate">REIFIED_KEYS</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.parser.ClefParser.event_filter"><code class="docutils literal notranslate">event_filter()</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.parser.ClefParser.file_path"><code class="docutils literal notranslate">file_path</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.parser.ClefParser.iter_events"><code class="docutils literal notranslate">iter_events()</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.parser.ClefParser.parse"><code class="docutils literal notranslate">parse()</span></code></a></li>
+<li><a class="reference internal" href="#pyclef.parser.ClefParser.parse_event"><code class="docutils literal notranslate">parse_event()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pyclef">Module contents</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">pyclef</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">pyclef API</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="pyclef-api">
+<h1>pyclef API<a class="headerlink" href="#pyclef-api" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-pyclef.collection">
+<span id="pyclef-collection-module"></span><h2>pyclef.collection module<a class="headerlink" href="#module-pyclef.collection" title="Link to this heading">¶</a></h2>
+<p>CLEF Event Collection Module</p>
+<p>This module provides a container class for managing collections of CLEF log events.
+The ClefEventCollection class offers convenient methods for filtering, slicing,
+and iterating over log events, making it easy to work with multiple events as
+a cohesive unit.</p>
+<p>The collection implements common Python protocols (iterator, sequence, length)
+allowing it to be used naturally with Python’s built-in functions and idioms.</p>
+<dl class="simple">
+<dt>Classes:</dt><dd><dl class="simple">
+<dt>ClefEventCollection: A container for multiple ClefEvent instances with</dt><dd><p>filtering, slicing, and iteration capabilities.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Basic collection usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefParser</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;log.clef&#39;</span><span class="p">)</span>
+</span><span data-line="4"><span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>  <span class="c1"># Returns ClefEventCollection</span>
+</span><span data-line="5">
+</span><span data-line="6"><span class="c1"># Check if collection has events</span>
+</span><span data-line="7"><span class="k">if</span> <span class="n">events</span><span class="p">:</span>
+</span><span data-line="8">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">events</span><span class="p">)</span><span class="si">}</span><span class="s2"> events&quot;</span><span class="p">)</span>
+</span><span data-line="9">
+</span><span data-line="10"><span class="c1"># Iterate over events</span>
+</span><span data-line="11"><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+</span><span data-line="12">    <span class="nb">print</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Filtering events:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Filter using a predicate function</span>
+</span><span data-line="2"><span class="n">errors</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">level</span> <span class="o">==</span> <span class="s1">&#39;Error&#39;</span><span class="p">)</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># Filter with complex conditions</span>
+</span><span data-line="5"><span class="n">recent_errors</span> <span class="o">=</span> <span class="n">events</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+</span><span data-line="6">    <span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">level</span> <span class="o">==</span> <span class="s1">&#39;Error&#39;</span> <span class="ow">and</span>
+</span><span data-line="7">             <span class="n">e</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">&gt;</span> <span class="s1">&#39;2026-01-24T00:00:00Z&#39;</span>
+</span><span data-line="8"><span class="p">)</span>
+</span></pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyclef.collection.ClefEventCollection">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyclef.collection.</span></span><span class="sig-name descname"><span class="pre">ClefEventCollection</span></span><a class="reference internal" href="_modules/pyclef/collection.html#ClefEventCollection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.collection.ClefEventCollection" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A container for managing multiple CLEF log events.</p>
+<p>This class provides a high-level interface for working with collections of
+ClefEvent instances. It supports filtering, slicing, iteration, and other
+operations that make it easy to process and analyze log events in bulk.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.collection.ClefEventCollection.add_event">
+<span class="sig-name descname"><span class="pre">add_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyclef.event.ClefEvent" title="pyclef.event.ClefEvent"><span class="pre">ClefEvent</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/pyclef/collection.html#ClefEventCollection.add_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.collection.ClefEventCollection.add_event" title="Link to this definition">¶</a></dt>
+<dd><p>Add an event to the collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>event</strong> – The ClefEvent instance to add to the collection.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">ClefEventCollection</span><span class="p">()</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">event</span> <span class="o">=</span> <span class="n">ClefEvent</span><span class="p">(</span><span class="n">reified</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;@l&#39;</span><span class="p">:</span> <span class="s1">&#39;Info&#39;</span><span class="p">},</span> <span class="n">user</span><span class="o">=</span><span class="p">{})</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">add_event</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
+</span><span data-line="5"><span class="go">1</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.collection.ClefEventCollection.filter">
+<span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyclef.event.ClefEvent" title="pyclef.event.ClefEvent"><span class="pre">ClefEvent</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclef.collection.ClefEventCollection" title="pyclef.collection.ClefEventCollection"><span class="pre">ClefEventCollection</span></a></span></span><a class="reference internal" href="_modules/pyclef/collection.html#ClefEventCollection.filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.collection.ClefEventCollection.filter" title="Link to this definition">¶</a></dt>
+<dd><p>Filter events using a predicate function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>predicate</strong> – A callable that takes a ClefEvent and returns a boolean.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new ClefEventCollection containing the filtered events.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">errors</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">level</span> <span class="o">==</span> <span class="s1">&#39;Error&#39;</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
+</span><span data-line="3"><span class="go">True</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.collection.ClefEventCollection.get_all_events">
+<span class="sig-name descname"><span class="pre">get_all_events</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyclef.event.ClefEvent" title="pyclef.event.ClefEvent"><span class="pre">ClefEvent</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pyclef/collection.html#ClefEventCollection.get_all_events"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.collection.ClefEventCollection.get_all_events" title="Link to this definition">¶</a></dt>
+<dd><p>Get all events as a Python list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new list containing all events in order.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyclef.event">
+<span id="pyclef-event-module"></span><h2>pyclef.event module<a class="headerlink" href="#module-pyclef.event" title="Link to this heading">¶</a></h2>
+<p>CLEF Event Representation Module</p>
+<p>This module provides the core data structure for representing individual CLEF
+(Compact Log Event Format) log events. Each event contains both reified (standard)
+fields and user-defined custom fields.</p>
+<p>The ClefEvent class serves as the primary interface for accessing log event data,
+providing convenient property accessors for standard CLEF fields and direct access
+to custom application-specific fields.</p>
+<dl class="simple">
+<dt>Classes:</dt><dd><dl class="simple">
+<dt>ClefEvent: Dataclass representing a single CLEF log event with both standard</dt><dd><p>and custom fields.</p>
+</dd>
+</dl>
+</dd>
+<dt>Standard CLEF Fields:</dt><dd><ul class="simple">
+<li><p>&#64;t (timestamp): ISO 8601 timestamp of the event</p></li>
+<li><p>&#64;m (message): Rendered log message</p></li>
+<li><p>&#64;mt (message_template): Structured message template</p></li>
+<li><p>&#64;l (level): Log level (e.g., Information, Warning, Error)</p></li>
+<li><p>&#64;x (exception): Exception details and stack trace</p></li>
+<li><p>&#64;i (event_id): Unique event identifier</p></li>
+<li><p>&#64;r (renderings): Alternative renderings of message parameters</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Basic event access:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefParser</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;log.clef&#39;</span><span class="p">)</span>
+</span><span data-line="4"><span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</span><span data-line="5">
+</span><span data-line="6"><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+</span><span data-line="7">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">level</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="8">
+</span><span data-line="9">    <span class="c1"># Access custom fields</span>
+</span><span data-line="10">    <span class="k">if</span> <span class="s1">&#39;UserId&#39;</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">user</span><span class="p">:</span>
+</span><span data-line="11">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;User: </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">user</span><span class="p">[</span><span class="s1">&#39;UserId&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Working with event data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">event</span> <span class="o">=</span> <span class="n">events</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="c1"># Standard fields via properties</span>
+</span><span data-line="4"><span class="nb">print</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">timestamp</span><span class="p">)</span>  <span class="c1"># &quot;2026-01-24T10:00:00.123Z&quot;</span>
+</span><span data-line="5"><span class="nb">print</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">level</span><span class="p">)</span>      <span class="c1"># &quot;Information&quot;</span>
+</span><span data-line="6"><span class="nb">print</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>    <span class="c1"># &quot;User logged in successfully&quot;</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="c1"># Custom fields via user dictionary</span>
+</span><span data-line="9"><span class="nb">print</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">user</span><span class="p">[</span><span class="s1">&#39;Environment&#39;</span><span class="p">])</span>  <span class="c1"># &quot;Production&quot;</span>
+</span><span data-line="10"><span class="nb">print</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">user</span><span class="p">[</span><span class="s1">&#39;RequestId&#39;</span><span class="p">])</span>    <span class="c1"># &quot;abc-123&quot;</span>
+</span></pre></div>
+</div>
+<p>Converting events:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># To dictionary</span>
+</span><span data-line="2"><span class="n">event_dict</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+</span><span data-line="3"><span class="c1"># {&#39;reified&#39;: {...}, &#39;user&#39;: {...}}</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="c1"># To JSON string</span>
+</span><span data-line="6"><span class="n">json_str</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span>
+</span><span data-line="7"><span class="c1"># &#39;{&quot;reified&quot;: {...}, &quot;user&quot;: {...}}&#39;</span>
+</span></pre></div>
+</div>
+<p>Checking for exceptions:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+</span><span data-line="2">    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">level</span> <span class="o">==</span> <span class="s1">&#39;Error&#39;</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">exception</span><span class="p">:</span>
+</span><span data-line="3">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exception occurred: </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">exception</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>All standard CLEF fields are accessed via properties returning Optional values</p></li>
+<li><p>Custom/user fields are stored in the ‘user’ dictionary attribute</p></li>
+<li><p>Reified fields contain standard CLEF metadata</p></li>
+<li><p>Events are immutable once created (dataclass with frozen=False by default)</p></li>
+<li><p>None is returned for missing standard fields</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyclef.event.ClefEvent">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyclef.event.</span></span><span class="sig-name descname"><span class="pre">ClefEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reified</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyclef/event.html#ClefEvent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.event.ClefEvent" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a single CLEF (Compact Log Event Format) log event.</p>
+<p>A CLEF event consists of two main components:
+1. Reified fields: Standard CLEF fields like timestamp, level, message, etc.
+2. User fields: Custom application-specific fields</p>
+<p>This class provides property accessors for all standard CLEF fields and
+direct dictionary access for custom fields. It implements useful methods
+for serialization and representation.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.event.ClefEvent.reified">
+<span class="sig-name descname"><span class="pre">reified</span></span><a class="headerlink" href="#pyclef.event.ClefEvent.reified" title="Link to this definition">¶</a></dt>
+<dd><p>Dictionary containing standard CLEF fields
+(those starting with &#64;). Keys use the CLEF format (e.g., ‘&#64;t’, ‘&#64;l’).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.event.ClefEvent.user">
+<span class="sig-name descname"><span class="pre">user</span></span><a class="headerlink" href="#pyclef.event.ClefEvent.user" title="Link to this definition">¶</a></dt>
+<dd><p>Dictionary containing custom application-defined
+fields. These are any fields that don’t start with &#64; in the original
+CLEF log entry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="simple">
+<dt>Properties:</dt><dd><ul class="simple">
+<li><p>timestamp: ISO 8601 formatted event timestamp (&#64;t field).</p></li>
+<li><p>level: Log level string (&#64;l field), e.g., ‘Information’, ‘Warning’, ‘Error’.</p></li>
+<li><p>message: Rendered log message (&#64;m field) with parameters substituted.</p></li>
+<li><p>message_template: Structured message template (&#64;mt field) before substitution.</p></li>
+<li><p>exception: Exception information (&#64;x field) including stack trace.</p></li>
+<li><p>event_id: Event identifier (&#64;i field), can be any type.</p></li>
+<li><p>renderings: Alternative renderings (&#64;r field) of message parameters.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Creating an event (typically done by parser):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef.event</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefEvent</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">event</span> <span class="o">=</span> <span class="n">ClefEvent</span><span class="p">(</span><span class="n">reified</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;@t&#39;</span><span class="p">:</span> <span class="s1">&#39;2026-01-24T10:00:00.123Z&#39;</span><span class="p">,</span> <span class="s1">&#39;@l&#39;</span><span class="p">:</span> <span class="s1">&#39;Information&#39;</span><span class="p">,</span> <span class="s1">&#39;@m&#39;</span><span class="p">:</span> <span class="s1">&#39;User logged in successfully&#39;</span><span class="p">},</span> <span class="n">user</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;UserId&#39;</span><span class="p">:</span> <span class="s1">&#39;12345&#39;</span><span class="p">})</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">event</span><span class="o">.</span><span class="n">timestamp</span>
+</span><span data-line="4"><span class="go">&#39;2026-01-24T10:00:00.123Z&#39;</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="n">event</span><span class="o">.</span><span class="n">level</span>
+</span><span data-line="6"><span class="go">&#39;Information&#39;</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt; </span><span class="n">event</span><span class="o">.</span><span class="n">message</span>
+</span><span data-line="8"><span class="go">&#39;User logged in successfully&#39;</span>
+</span><span data-line="9"><span class="gp">&gt;&gt;&gt; </span><span class="n">event</span><span class="o">.</span><span class="n">user</span><span class="p">[</span><span class="s1">&#39;UserId&#39;</span><span class="p">]</span>
+</span><span data-line="10"><span class="go">&#39;12345&#39;</span>
+</span></pre></div>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="pyclef.event.ClefEvent.event_id">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">event_id</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#pyclef.event.ClefEvent.event_id" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyclef.event.ClefEvent.exception">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">exception</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#pyclef.event.ClefEvent.exception" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyclef.event.ClefEvent.level">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">level</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#pyclef.event.ClefEvent.level" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyclef.event.ClefEvent.message">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">message</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#pyclef.event.ClefEvent.message" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyclef.event.ClefEvent.message_template">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">message_template</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#pyclef.event.ClefEvent.message_template" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">reified</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#id0" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyclef.event.ClefEvent.renderings">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">renderings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Any</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#pyclef.event.ClefEvent.renderings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyclef.event.ClefEvent.timestamp">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">timestamp</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#pyclef.event.ClefEvent.timestamp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.event.ClefEvent.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pyclef/event.html#ClefEvent.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.event.ClefEvent.to_dict" title="Link to this definition">¶</a></dt>
+<dd><p>Convert event to dictionary</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.event.ClefEvent.to_json">
+<span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pyclef/event.html#ClefEvent.to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.event.ClefEvent.to_json" title="Link to this definition">¶</a></dt>
+<dd><p>Convert event to JSON string</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">user</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span><a class="headerlink" href="#id1" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyclef.exceptions">
+<span id="pyclef-exceptions-module"></span><h2>pyclef.exceptions module<a class="headerlink" href="#module-pyclef.exceptions" title="Link to this heading">¶</a></h2>
+<p>CLEF Parsing Exceptions Module</p>
+<p>This module defines custom exceptions for handling errors that occur during
+CLEF (Compact Log Event Format) file parsing and processing operations.</p>
+<p>All exceptions inherit from the base ClefParseError class, allowing for
+hierarchical exception handling. This enables callers to catch specific
+errors or all CLEF-related errors using the base class.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1">Exception Hierarchy:
+</span><span data-line="2">    ClefParseError (base)
+</span><span data-line="3">    ├── ClefFileNotFoundError
+</span><span data-line="4">    ├── ClefJSONDecodeError
+</span><span data-line="5">    └── ClefIOError
+</span></pre></div>
+</div>
+<dl class="simple">
+<dt>Classes:</dt><dd><p>ClefParseError: Base exception for all CLEF parsing errors.
+ClefFileNotFoundError: Raised when a CLEF file cannot be found.
+ClefJSONDecodeError: Raised when JSON decoding fails on a specific line.
+ClefIOError: Raised when I/O operations fail during file reading.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Basic exception handling:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefParser</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+</span><span data-line="3">    <span class="n">ClefFileNotFoundError</span><span class="p">,</span>
+</span><span data-line="4">    <span class="n">ClefJSONDecodeError</span><span class="p">,</span>
+</span><span data-line="5">    <span class="n">ClefParseError</span>
+</span><span data-line="6"><span class="p">)</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="k">try</span><span class="p">:</span>
+</span><span data-line="9">    <span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;logs/app.clef&#39;</span><span class="p">)</span>
+</span><span data-line="10">    <span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</span><span data-line="11"><span class="k">except</span> <span class="n">ClefFileNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="12">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File not found: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="13"><span class="k">except</span> <span class="n">ClefJSONDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="14">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid JSON at line </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">line_num</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">original_error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="15"><span class="k">except</span> <span class="n">ClefParseError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="16">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;General parsing error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Catching all CLEF errors:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">try</span><span class="p">:</span>
+</span><span data-line="2">    <span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;logs/app.clef&#39;</span><span class="p">)</span>
+</span><span data-line="3">    <span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</span><span data-line="4"><span class="k">except</span> <span class="n">ClefParseError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="5">    <span class="c1"># Catches all CLEF-related exceptions</span>
+</span><span data-line="6">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CLEF parsing failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Accessing exception properties:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">try</span><span class="p">:</span>
+</span><span data-line="2">    <span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;invalid.clef&#39;</span><span class="p">)</span>
+</span><span data-line="3">    <span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</span><span data-line="4"><span class="k">except</span> <span class="n">ClefJSONDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="5">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Line number: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">line_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="6">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Content: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">line_content</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="7">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original error: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">original_error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>All exceptions preserve the original error via the ‘original_error’ attribute</p></li>
+<li><p>Exception messages are formatted to provide context for debugging</p></li>
+<li><p>Line content in ClefJSONDecodeError is truncated to 100 characters for readability</p></li>
+</ul>
+<dl class="py exception">
+<dt class="sig sig-object py" id="pyclef.exceptions.ClefFileNotFoundError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyclef.exceptions.</span></span><span class="sig-name descname"><span class="pre">ClefFileNotFoundError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyclef/exceptions.html#ClefFileNotFoundError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.exceptions.ClefFileNotFoundError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyclef.exceptions.ClefParseError" title="pyclef.exceptions.ClefParseError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClefParseError</span></code></a></p>
+<p>Raised when a CLEF file cannot be found at the specified path.</p>
+<p>This exception is raised when attempting to open a CLEF file that does not
+exist or is not accessible at the given file path.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.exceptions.ClefFileNotFoundError.file_path">
+<span class="sig-name descname"><span class="pre">file_path</span></span><a class="headerlink" href="#pyclef.exceptions.ClefFileNotFoundError.file_path" title="Link to this definition">¶</a></dt>
+<dd><p>The path to the file that was not found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> – The path to the missing CLEF file.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefParser</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefFileNotFoundError</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt;</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;nonexistent.clef&#39;</span><span class="p">)</span>
+</span><span data-line="6"><span class="gp">... </span>    <span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</span><span data-line="7"><span class="gp">... </span><span class="k">except</span> <span class="n">ClefFileNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="8"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot find file: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="9"><span class="go">Cannot find file: nonexistent.clef</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pyclef.exceptions.ClefIOError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyclef.exceptions.</span></span><span class="sig-name descname"><span class="pre">ClefIOError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Exception</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyclef/exceptions.html#ClefIOError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.exceptions.ClefIOError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyclef.exceptions.ClefParseError" title="pyclef.exceptions.ClefParseError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClefParseError</span></code></a></p>
+<p>Raised when an I/O error occurs while reading a CLEF file.</p>
+<p>This exception is raised for various I/O-related errors such as permission
+denied, disk read errors, or other file system issues that prevent the
+CLEF file from being read successfully.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.exceptions.ClefIOError.file_path">
+<span class="sig-name descname"><span class="pre">file_path</span></span><a class="headerlink" href="#pyclef.exceptions.ClefIOError.file_path" title="Link to this definition">¶</a></dt>
+<dd><p>The path to the file that caused the I/O error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.exceptions.ClefIOError.original_error">
+<span class="sig-name descname"><span class="pre">original_error</span></span><a class="headerlink" href="#pyclef.exceptions.ClefIOError.original_error" title="Link to this definition">¶</a></dt>
+<dd><p>The underlying IOError or OSError.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Exception</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> – The path to the CLEF file being accessed.</p></li>
+<li><p><strong>original_error</strong> – The original I/O exception that was raised.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefParser</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefIOError</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt;</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;/protected/log.clef&#39;</span><span class="p">)</span>
+</span><span data-line="6"><span class="gp">... </span>    <span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</span><span data-line="7"><span class="gp">... </span><span class="k">except</span> <span class="n">ClefIOError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="8"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot read file: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="9"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Reason: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">original_error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="10"><span class="go">Cannot read file: /protected/log.clef</span>
+</span><span data-line="11"><span class="go">Reason: [Errno 13] Permission denied: &#39;/protected/log.clef&#39;</span>
+</span></pre></div>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Common causes include permission issues, disk errors, or network failures</p></li>
+<li><p>The original_error contains the specific system error details</p></li>
+<li><p>File path is preserved for debugging and logging purposes</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pyclef.exceptions.ClefJSONDecodeError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyclef.exceptions.</span></span><span class="sig-name descname"><span class="pre">ClefJSONDecodeError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Exception</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyclef/exceptions.html#ClefJSONDecodeError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.exceptions.ClefJSONDecodeError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyclef.exceptions.ClefParseError" title="pyclef.exceptions.ClefParseError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClefParseError</span></code></a></p>
+<p>Raised when a line in the CLEF file contains invalid JSON.</p>
+<p>CLEF files use newline-delimited JSON (NDJSON) format where each line
+must be valid JSON. This exception is raised when a line fails to parse
+as valid JSON, typically due to syntax errors or malformed data.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.exceptions.ClefJSONDecodeError.line_num">
+<span class="sig-name descname"><span class="pre">line_num</span></span><a class="headerlink" href="#pyclef.exceptions.ClefJSONDecodeError.line_num" title="Link to this definition">¶</a></dt>
+<dd><p>The line number (1-indexed) where the error occurred.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.exceptions.ClefJSONDecodeError.line_content">
+<span class="sig-name descname"><span class="pre">line_content</span></span><a class="headerlink" href="#pyclef.exceptions.ClefJSONDecodeError.line_content" title="Link to this definition">¶</a></dt>
+<dd><p>The content of the line that failed to parse.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.exceptions.ClefJSONDecodeError.original_error">
+<span class="sig-name descname"><span class="pre">original_error</span></span><a class="headerlink" href="#pyclef.exceptions.ClefJSONDecodeError.original_error" title="Link to this definition">¶</a></dt>
+<dd><p>The underlying JSONDecodeError from the
+json module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Exception</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>line_num</strong> – The line number where JSON decoding failed (1-indexed).</p></li>
+<li><p><strong>line_content</strong> – The actual content of the problematic line.</p></li>
+<li><p><strong>original_error</strong> – The original JSONDecodeError exception.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefParser</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefJSONDecodeError</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt;</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;malformed.clef&#39;</span><span class="p">)</span>
+</span><span data-line="6"><span class="gp">... </span>    <span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</span><span data-line="7"><span class="gp">... </span><span class="k">except</span> <span class="n">ClefJSONDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="8"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;JSON error at line </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">line_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="9"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Content: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">line_content</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+</span><span data-line="10"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">original_error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="11"><span class="go">JSON error at line 42</span>
+</span><span data-line="12"><span class="go">Content: {&quot;@t&quot;:&quot;2026-01-24T10:00:00Z&quot;,&quot;@m&quot;:&quot;Missing clo...</span>
+</span><span data-line="13"><span class="go">Error: Expecting &#39;,&#39; delimiter: line 1 column 50 (char 49)</span>
+</span></pre></div>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Line numbers start at 1 for user-friendly error messages</p></li>
+<li><p>Line content is truncated to 100 characters in the error message</p></li>
+<li><p>The full line content is available via the line_content attribute</p></li>
+<li><p>The original JSONDecodeError provides detailed position information</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pyclef.exceptions.ClefParseError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyclef.exceptions.</span></span><span class="sig-name descname"><span class="pre">ClefParseError</span></span><a class="reference internal" href="_modules/pyclef/exceptions.html#ClefParseError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.exceptions.ClefParseError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Base exception for all CLEF parsing errors.</p>
+<p>This is the parent class for all CLEF-related exceptions. Use this in
+exception handlers to catch any CLEF parsing error regardless of the
+specific type.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;log.clef&#39;</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</span><span data-line="4"><span class="gp">... </span><span class="k">except</span> <span class="n">ClefParseError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="5"><span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parsing failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-pyclef.fields">
+<span id="pyclef-fields-module"></span><h2>pyclef.fields module<a class="headerlink" href="#module-pyclef.fields" title="Link to this heading">¶</a></h2>
+<p>CLEF Field Definitions Module</p>
+<p>This module defines the standard field names used in the CLEF (Compact Log Event
+Format) specification. These fields represent the core metadata and content of
+log events in the CLEF format.</p>
+<p>CLEF uses &#64;-prefixed field names for standard/reified fields to distinguish them
+from user-defined application fields. This module provides an enumeration of these
+standard fields for type-safe access throughout the library.</p>
+<dl class="simple">
+<dt>Classes:</dt><dd><p>ClefField: Enumeration of standard CLEF field names.</p>
+</dd>
+<dt>Standard Fields:</dt><dd><dl class="simple">
+<dt>TIMESTAMP (&#64;t):</dt><dd><p>ISO 8601 formatted timestamp indicating when the event occurred.
+Example: “2026-01-24T10:00:00.123Z”</p>
+</dd>
+<dt>MESSAGE (&#64;m):</dt><dd><p>The rendered log message with all parameters substituted.
+Example: “User alice logged in from 192.168.1.1”</p>
+</dd>
+<dt>MESSAGE_TEMPLATE (&#64;mt):</dt><dd><p>The structured message template before parameter substitution.
+Example: “User {UserId} logged in from {IpAddress}”</p>
+</dd>
+<dt>LEVEL (&#64;l):</dt><dd><p>The log level/severity of the event.
+Examples: “Verbose”, “Debug”, “Information”, “Warning”, “Error”, “Fatal”</p>
+</dd>
+<dt>EXCEPTION (&#64;x):</dt><dd><p>Exception information including type, message, and stack trace.
+Present when the log event is associated with an error/exception.</p>
+</dd>
+<dt>EVENT_ID (&#64;i):</dt><dd><p>A unique identifier for this type of event, useful for categorization.
+Can be a string, integer, or other identifier type.</p>
+</dd>
+<dt>RENDERINGS (&#64;r):</dt><dd><p>Alternative renderings of message template parameters.
+Provides different formatting or serialization options for parameters.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Using field enums for type-safe access:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef.fields</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefField</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="c1"># Access field values</span>
+</span><span data-line="4"><span class="n">timestamp_field</span> <span class="o">=</span> <span class="n">ClefField</span><span class="o">.</span><span class="n">TIMESTAMP</span><span class="o">.</span><span class="n">value</span>  <span class="c1"># &quot;@t&quot;</span>
+</span><span data-line="5"><span class="n">level_field</span> <span class="o">=</span> <span class="n">ClefField</span><span class="o">.</span><span class="n">LEVEL</span><span class="o">.</span><span class="n">value</span>          <span class="c1"># &quot;@l&quot;</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="c1"># Use in dictionary lookups</span>
+</span><span data-line="8"><span class="n">event_data</span> <span class="o">=</span> <span class="p">{</span>
+</span><span data-line="9">    <span class="n">ClefField</span><span class="o">.</span><span class="n">TIMESTAMP</span><span class="o">.</span><span class="n">value</span><span class="p">:</span> <span class="s2">&quot;2026-01-24T10:00:00Z&quot;</span><span class="p">,</span>
+</span><span data-line="10">    <span class="n">ClefField</span><span class="o">.</span><span class="n">LEVEL</span><span class="o">.</span><span class="n">value</span><span class="p">:</span> <span class="s2">&quot;Information&quot;</span><span class="p">,</span>
+</span><span data-line="11">    <span class="n">ClefField</span><span class="o">.</span><span class="n">MESSAGE</span><span class="o">.</span><span class="n">value</span><span class="p">:</span> <span class="s2">&quot;Application started&quot;</span>
+</span><span data-line="12"><span class="p">}</span>
+</span><span data-line="13">
+</span><span data-line="14"><span class="c1"># Get timestamp from event</span>
+</span><span data-line="15"><span class="n">timestamp</span> <span class="o">=</span> <span class="n">event_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ClefField</span><span class="o">.</span><span class="n">TIMESTAMP</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Checking if a field is a standard CLEF field:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef.fields</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefField</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="c1"># Get all standard field names</span>
+</span><span data-line="4"><span class="n">standard_fields</span> <span class="o">=</span> <span class="p">{</span><span class="n">field</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">ClefField</span><span class="p">}</span>
+</span><span data-line="5"><span class="c1"># {&#39;@t&#39;, &#39;@m&#39;, &#39;@mt&#39;, &#39;@l&#39;, &#39;@x&#39;, &#39;@i&#39;, &#39;@r&#39;}</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="c1"># Check if a field is standard</span>
+</span><span data-line="8"><span class="n">field_name</span> <span class="o">=</span> <span class="s2">&quot;@t&quot;</span>
+</span><span data-line="9"><span class="n">is_standard</span> <span class="o">=</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">standard_fields</span>  <span class="c1"># True</span>
+</span><span data-line="10">
+</span><span data-line="11"><span class="n">field_name</span> <span class="o">=</span> <span class="s2">&quot;CustomField&quot;</span>
+</span><span data-line="12"><span class="n">is_standard</span> <span class="o">=</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="n">standard_fields</span>  <span class="c1"># False</span>
+</span></pre></div>
+</div>
+<p>Iterating over all standard fields:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef.fields</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefField</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="c1"># List all standard fields</span>
+</span><span data-line="4"><span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">ClefField</span><span class="p">:</span>
+</span><span data-line="5">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">field</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="c1"># Output:</span>
+</span><span data-line="8"><span class="c1"># TIMESTAMP: @t</span>
+</span><span data-line="9"><span class="c1"># MESSAGE: @m</span>
+</span><span data-line="10"><span class="c1"># MESSAGE_TEMPLATE: @mt</span>
+</span><span data-line="11"><span class="c1"># LEVEL: @l</span>
+</span><span data-line="12"><span class="c1"># EXCEPTION: @x</span>
+</span><span data-line="13"><span class="c1"># EVENT_ID: @i</span>
+</span><span data-line="14"><span class="c1"># RENDERINGS: @r</span>
+</span></pre></div>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>All CLEF standard fields use the &#64; prefix to avoid conflicts with user fields</p></li>
+<li><p>ClefField inherits from both str and Enum for convenient string comparisons</p></li>
+<li><p>The enum values are the actual CLEF field names as they appear in log files</p></li>
+<li><p>User-defined fields (without &#64; prefix) are not part of this enumeration</p></li>
+<li><p>Fields prefixed with &#64;&#64; in raw CLEF are unescaped to &#64; in user fields</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p>CLEF Format Specification: <a class="reference external" href="https://github.com/serilog/serilog-formatting-compact">https://github.com/serilog/serilog-formatting-compact</a></p></li>
+<li><p>ClefEvent: The event class that uses these field definitions</p></li>
+<li><p>ClefParser: Parser that extracts these fields from CLEF files</p></li>
+</ul>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyclef.fields.ClefField">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyclef.fields.</span></span><span class="sig-name descname"><span class="pre">ClefField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyclef/fields.html#ClefField"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.fields.ClefField" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.fields.ClefField.EVENT_ID">
+<span class="sig-name descname"><span class="pre">EVENT_ID</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'&#64;i'</span></span><a class="headerlink" href="#pyclef.fields.ClefField.EVENT_ID" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.fields.ClefField.EXCEPTION">
+<span class="sig-name descname"><span class="pre">EXCEPTION</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'&#64;x'</span></span><a class="headerlink" href="#pyclef.fields.ClefField.EXCEPTION" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.fields.ClefField.LEVEL">
+<span class="sig-name descname"><span class="pre">LEVEL</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'&#64;l'</span></span><a class="headerlink" href="#pyclef.fields.ClefField.LEVEL" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.fields.ClefField.MESSAGE">
+<span class="sig-name descname"><span class="pre">MESSAGE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'&#64;m'</span></span><a class="headerlink" href="#pyclef.fields.ClefField.MESSAGE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.fields.ClefField.MESSAGE_TEMPLATE">
+<span class="sig-name descname"><span class="pre">MESSAGE_TEMPLATE</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'&#64;mt'</span></span><a class="headerlink" href="#pyclef.fields.ClefField.MESSAGE_TEMPLATE" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.fields.ClefField.RENDERINGS">
+<span class="sig-name descname"><span class="pre">RENDERINGS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'&#64;r'</span></span><a class="headerlink" href="#pyclef.fields.ClefField.RENDERINGS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.fields.ClefField.TIMESTAMP">
+<span class="sig-name descname"><span class="pre">TIMESTAMP</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'&#64;t'</span></span><a class="headerlink" href="#pyclef.fields.ClefField.TIMESTAMP" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyclef.filter">
+<span id="pyclef-filter-module"></span><h2>pyclef.filter module<a class="headerlink" href="#module-pyclef.filter" title="Link to this heading">¶</a></h2>
+<p>CLEF Event Filtering Module</p>
+<p>This module provides a fluent builder interface for filtering CLEF log events
+based on various criteria including timestamps, log levels, message patterns,
+and custom fields.</p>
+<dl class="simple">
+<dt>Classes:</dt><dd><dl class="simple">
+<dt>ClefEventFilterBuilder: Builder class for constructing complex event filters</dt><dd><p>using method chaining.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Basic filtering by log level:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefParser</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;log.clef&#39;</span><span class="p">)</span>
+</span><span data-line="4"><span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</span><span data-line="5">
+</span><span data-line="6"><span class="n">errors</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">event_filter</span><span class="p">(</span><span class="n">events</span><span class="p">)</span>            <span class="o">.</span><span class="n">level</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">)</span>            <span class="o">.</span><span class="n">filter</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p>Advanced filtering with multiple criteria:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">filtered</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">event_filter</span><span class="p">(</span><span class="n">events</span><span class="p">)</span>            <span class="o">.</span><span class="n">start_time</span><span class="p">(</span><span class="s1">&#39;2026-01-24T00:00:00Z&#39;</span><span class="p">)</span>            <span class="o">.</span><span class="n">end_time</span><span class="p">(</span><span class="s1">&#39;2026-01-24T23:59:59Z&#39;</span><span class="p">)</span>            <span class="o">.</span><span class="n">level</span><span class="p">(</span><span class="s1">&#39;Warning&#39;</span><span class="p">)</span>            <span class="o">.</span><span class="n">msg_regex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;database.*timeout&#39;</span><span class="p">)</span>            <span class="o">.</span><span class="n">user_fields</span><span class="p">({</span><span class="s1">&#39;Environment&#39;</span><span class="p">:</span> <span class="s1">&#39;Production&#39;</span><span class="p">})</span>            <span class="o">.</span><span class="n">filter</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p>Chaining multiple filters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">critical_errors</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">event_filter</span><span class="p">(</span><span class="n">events</span><span class="p">)</span>            <span class="o">.</span><span class="n">level</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">)</span>            <span class="o">.</span><span class="n">exception_regex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;NullPointerException&#39;</span><span class="p">)</span>            <span class="o">.</span><span class="n">start_time</span><span class="p">(</span><span class="s1">&#39;2026-01-24T10:00:00Z&#39;</span><span class="p">)</span>            <span class="o">.</span><span class="n">filter</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<dl class="simple">
+<dt>Supported Filter Types:</dt><dd><ul class="simple">
+<li><p>Timestamp ranges (start_time, end_time)</p></li>
+<li><p>Log levels (level)</p></li>
+<li><p>Message patterns (msg_regex, msg_template_regex)</p></li>
+<li><p>Exception patterns (exception_regex)</p></li>
+<li><p>Rendering patterns (renderings_regex)</p></li>
+<li><p>Custom user fields (user_fields)</p></li>
+<li><p>Event IDs (eventid)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>All filter methods return the builder instance for method chaining</p></li>
+<li><p>Call filter() at the end to execute filtering and get results</p></li>
+<li><p>Regex patterns use Python’s re module syntax</p></li>
+<li><p>Invalid regex patterns raise ValueError</p></li>
+<li><p>Timestamp filtering uses ISO 8601 format</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyclef.filter.ClefEventFilterBuilder">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyclef.filter.</span></span><span class="sig-name descname"><span class="pre">ClefEventFilterBuilder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyclef.collection.ClefEventCollection" title="pyclef.collection.ClefEventCollection"><span class="pre">ClefEventCollection</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyclef/filter.html#ClefEventFilterBuilder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.filter.ClefEventFilterBuilder" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Builder for constructing and applying filters to CLEF event collections.</p>
+<p>This class implements the builder pattern, allowing you to chain multiple
+filter criteria before executing the filter operation. All filter methods
+return self to enable fluent method chaining.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.filter.ClefEventFilterBuilder.events">
+<span class="sig-name descname"><span class="pre">events</span></span><a class="headerlink" href="#pyclef.filter.ClefEventFilterBuilder.events" title="Link to this definition">¶</a></dt>
+<dd><p>The collection of events to filter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#pyclef.collection.ClefEventCollection" title="pyclef.collection.ClefEventCollection">ClefEventCollection</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefParser</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;log.clef&#39;</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt;</span>
+</span><span data-line="5"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Filter errors from the last hour</span>
+</span><span data-line="6"><span class="gp">&gt;&gt;&gt; </span><span class="n">recent_errors</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">event_filter</span><span class="p">(</span><span class="n">events</span><span class="p">)</span>        <span class="o">...</span>     <span class="o">.</span><span class="n">level</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">)</span>        <span class="o">...</span>     <span class="o">.</span><span class="n">start_time</span><span class="p">(</span><span class="s1">&#39;2026-01-24T10:00:00Z&#39;</span><span class="p">)</span>        <span class="o">...</span>     <span class="o">.</span><span class="n">filter</span><span class="p">()</span>
+</span><span data-line="7"><span class="gp">&gt;&gt;&gt;</span>
+</span><span data-line="8"><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Filter by message pattern and custom field</span>
+</span><span data-line="9"><span class="gp">&gt;&gt;&gt; </span><span class="n">db_errors</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">event_filter</span><span class="p">(</span><span class="n">events</span><span class="p">)</span>        <span class="o">...</span>     <span class="o">.</span><span class="n">msg_regex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;database.*failed&#39;</span><span class="p">)</span>        <span class="o">...</span>     <span class="o">.</span><span class="n">user_fields</span><span class="p">({</span><span class="s1">&#39;Component&#39;</span><span class="p">:</span> <span class="s1">&#39;Database&#39;</span><span class="p">})</span>        <span class="o">...</span>     <span class="o">.</span><span class="n">filter</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.filter.ClefEventFilterBuilder.end_time">
+<span class="sig-name descname"><span class="pre">end_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder" title="pyclef.filter.ClefEventFilterBuilder"><span class="pre">ClefEventFilterBuilder</span></a></span></span><a class="reference internal" href="_modules/pyclef/filter.html#ClefEventFilterBuilder.end_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.filter.ClefEventFilterBuilder.end_time" title="Link to this definition">¶</a></dt>
+<dd><p>Filter events that occurred on or before the specified timestamp.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – ISO 8601 formatted timestamp string (e.g., ‘2026-01-24T23:59:59Z’).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – If value is None or empty.</p></li>
+<li><p><a class="reference internal" href="#pyclef.filter.ClefInvalidTimestampError" title="pyclef.filter.ClefInvalidTimestampError"><strong>ClefInvalidTimestampError</strong></a> – If timestamp format is invalid.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">end_time</span><span class="p">(</span><span class="s1">&#39;2026-01-24T23:59:59Z&#39;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.filter.ClefEventFilterBuilder.eventid">
+<span class="sig-name descname"><span class="pre">eventid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder" title="pyclef.filter.ClefEventFilterBuilder"><span class="pre">ClefEventFilterBuilder</span></a></span></span><a class="reference internal" href="_modules/pyclef/filter.html#ClefEventFilterBuilder.eventid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.filter.ClefEventFilterBuilder.eventid" title="Link to this definition">¶</a></dt>
+<dd><p>Filter events by event ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – The event ID to filter by (can be string, int, or other types).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">eventid</span><span class="p">(</span><span class="s1">&#39;evt_12345&#39;</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">eventid</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.filter.ClefEventFilterBuilder.exception_regex">
+<span class="sig-name descname"><span class="pre">exception_regex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder" title="pyclef.filter.ClefEventFilterBuilder"><span class="pre">ClefEventFilterBuilder</span></a></span></span><a class="reference internal" href="_modules/pyclef/filter.html#ClefEventFilterBuilder.exception_regex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.filter.ClefEventFilterBuilder.exception_regex" title="Link to this definition">¶</a></dt>
+<dd><p>Filter events by exception information using a regular expression.</p>
+<p>Searches the exception stack trace or error message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – Regular expression pattern string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the regex pattern is invalid or empty.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">exception_regex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;NullPointerException&#39;</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">exception_regex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;at com\.example\..*&#39;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.filter.ClefEventFilterBuilder.filter">
+<span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclef.collection.ClefEventCollection" title="pyclef.collection.ClefEventCollection"><span class="pre">ClefEventCollection</span></a></span></span><a class="reference internal" href="_modules/pyclef/filter.html#ClefEventFilterBuilder.filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.filter.ClefEventFilterBuilder.filter" title="Link to this definition">¶</a></dt>
+<dd><p>Execute all configured filters and return the filtered event collection.</p>
+<p>This method applies all previously configured filter criteria in sequence.
+An event must pass ALL filter conditions to be included in the result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A new ClefEventCollection containing only the events that match
+all filter criteria.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#pyclef.filter.ClefFilterError" title="pyclef.filter.ClefFilterError"><strong>ClefFilterError</strong></a> – If filtering operation encounters an error.</p></li>
+<li><p><a class="reference internal" href="#pyclef.filter.ClefInvalidTimestampError" title="pyclef.filter.ClefInvalidTimestampError"><strong>ClefInvalidTimestampError</strong></a> – If event timestamps cannot be parsed.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">filtered</span> <span class="o">=</span> <span class="n">builder</span>            <span class="o">...</span>     <span class="o">.</span><span class="n">level</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">)</span>            <span class="o">...</span>     <span class="o">.</span><span class="n">start_time</span><span class="p">(</span><span class="s1">&#39;2026-01-24T00:00:00Z&#39;</span><span class="p">)</span>            <span class="o">...</span>     <span class="o">.</span><span class="n">msg_regex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;timeout&#39;</span><span class="p">)</span>            <span class="o">...</span>     <span class="o">.</span><span class="n">filter</span><span class="p">()</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span><span class="si">}</span><span class="s2"> matching events&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Events without timestamps are excluded from time-based filters</p></li>
+<li><p>Empty or None values are converted to empty strings for pattern matching</p></li>
+<li><p>All filters use AND logic (events must match all conditions)</p></li>
+<li><p>Malformed event data will be skipped with a warning</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.filter.ClefEventFilterBuilder.level">
+<span class="sig-name descname"><span class="pre">level</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder" title="pyclef.filter.ClefEventFilterBuilder"><span class="pre">ClefEventFilterBuilder</span></a></span></span><a class="reference internal" href="_modules/pyclef/filter.html#ClefEventFilterBuilder.level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.filter.ClefEventFilterBuilder.level" title="Link to this definition">¶</a></dt>
+<dd><p>Filter events by log level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – Log level string (e.g., ‘Error’, ‘Warning’, ‘Information’, ‘Debug’).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If value is None or empty.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">level</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.filter.ClefEventFilterBuilder.msg_regex">
+<span class="sig-name descname"><span class="pre">msg_regex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder" title="pyclef.filter.ClefEventFilterBuilder"><span class="pre">ClefEventFilterBuilder</span></a></span></span><a class="reference internal" href="_modules/pyclef/filter.html#ClefEventFilterBuilder.msg_regex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.filter.ClefEventFilterBuilder.msg_regex" title="Link to this definition">¶</a></dt>
+<dd><p>Filter messages using a regular expression pattern.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – Regular expression pattern string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the regex pattern is invalid or empty.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">msg_regex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;failed.*timeout&#39;</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">msg_regex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^ERROR: &#39;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.filter.ClefEventFilterBuilder.msg_template_regex">
+<span class="sig-name descname"><span class="pre">msg_template_regex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder" title="pyclef.filter.ClefEventFilterBuilder"><span class="pre">ClefEventFilterBuilder</span></a></span></span><a class="reference internal" href="_modules/pyclef/filter.html#ClefEventFilterBuilder.msg_template_regex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.filter.ClefEventFilterBuilder.msg_template_regex" title="Link to this definition">¶</a></dt>
+<dd><p>Filter message templates using a regular expression pattern.</p>
+<p>Message templates are the structured logging templates before
+parameter substitution (e.g., “User {UserId} logged in from {IpAddress}”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – Regular expression pattern string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the regex pattern is invalid or empty.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">msg_template_regex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;User .* logged in&#39;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.filter.ClefEventFilterBuilder.renderings_regex">
+<span class="sig-name descname"><span class="pre">renderings_regex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder" title="pyclef.filter.ClefEventFilterBuilder"><span class="pre">ClefEventFilterBuilder</span></a></span></span><a class="reference internal" href="_modules/pyclef/filter.html#ClefEventFilterBuilder.renderings_regex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.filter.ClefEventFilterBuilder.renderings_regex" title="Link to this definition">¶</a></dt>
+<dd><p>Filter events by renderings field using a regular expression.</p>
+<p>Renderings contain alternative representations of log message parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – Regular expression pattern string.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the regex pattern is invalid or empty.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">renderings_regex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;format.*json&#39;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.filter.ClefEventFilterBuilder.start_time">
+<span class="sig-name descname"><span class="pre">start_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder" title="pyclef.filter.ClefEventFilterBuilder"><span class="pre">ClefEventFilterBuilder</span></a></span></span><a class="reference internal" href="_modules/pyclef/filter.html#ClefEventFilterBuilder.start_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.filter.ClefEventFilterBuilder.start_time" title="Link to this definition">¶</a></dt>
+<dd><p>Filter events that occurred on or after the specified timestamp.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – ISO 8601 formatted timestamp string (e.g., ‘2026-01-24T10:00:00Z’).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ValueError</strong> – If value is None or empty.</p></li>
+<li><p><a class="reference internal" href="#pyclef.filter.ClefInvalidTimestampError" title="pyclef.filter.ClefInvalidTimestampError"><strong>ClefInvalidTimestampError</strong></a> – If timestamp format is invalid.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">start_time</span><span class="p">(</span><span class="s1">&#39;2026-01-24T00:00:00Z&#39;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.filter.ClefEventFilterBuilder.user_fields">
+<span class="sig-name descname"><span class="pre">user_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder" title="pyclef.filter.ClefEventFilterBuilder"><span class="pre">ClefEventFilterBuilder</span></a></span></span><a class="reference internal" href="_modules/pyclef/filter.html#ClefEventFilterBuilder.user_fields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.filter.ClefEventFilterBuilder.user_fields" title="Link to this definition">¶</a></dt>
+<dd><p>Filter events by custom user-defined fields.</p>
+<p>Only events that have ALL specified field key-value pairs will be included.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – Dictionary of field names and their expected values.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Self for method chaining.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If value is None or empty dictionary.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">user_fields</span><span class="p">({</span><span class="s1">&#39;Environment&#39;</span><span class="p">:</span> <span class="s1">&#39;Production&#39;</span><span class="p">,</span> <span class="s1">&#39;Service&#39;</span><span class="p">:</span> <span class="s1">&#39;API&#39;</span><span class="p">})</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">builder</span><span class="o">.</span><span class="n">user_fields</span><span class="p">({</span><span class="s1">&#39;UserId&#39;</span><span class="p">:</span> <span class="mi">12345</span><span class="p">})</span>
+</span></pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pyclef.filter.ClefFilterError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyclef.filter.</span></span><span class="sig-name descname"><span class="pre">ClefFilterError</span></span><a class="reference internal" href="_modules/pyclef/filter.html#ClefFilterError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.filter.ClefFilterError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyclef.exceptions.ClefParseError" title="pyclef.exceptions.ClefParseError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClefParseError</span></code></a></p>
+<p>Raised when filtering operations fail</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pyclef.filter.ClefInvalidTimestampError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyclef.filter.</span></span><span class="sig-name descname"><span class="pre">ClefInvalidTimestampError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original_error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Exception</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyclef/filter.html#ClefInvalidTimestampError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.filter.ClefInvalidTimestampError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyclef.filter.ClefFilterError" title="pyclef.filter.ClefFilterError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ClefFilterError</span></code></a></p>
+<p>Raised when timestamp parsing fails</p>
+</dd></dl>
+
+</section>
+<section id="module-pyclef.parser">
+<span id="pyclef-parser-module"></span><h2>pyclef.parser module<a class="headerlink" href="#module-pyclef.parser" title="Link to this heading">¶</a></h2>
+<p>CLEF File Parser Module</p>
+<p>This module provides the main parser for reading and processing CLEF (Compact Log
+Event Format) files. The ClefParser class handles file I/O, JSON parsing, and
+conversion of raw CLEF data into structured ClefEvent objects.</p>
+<p>CLEF is a compact, newline-delimited JSON format for structured log events. Each
+line in a CLEF file represents a single log event with standard fields (prefixed
+with &#64;) and optional user-defined fields.</p>
+<dl class="simple">
+<dt>Classes:</dt><dd><dl class="simple">
+<dt>ClefParser: Main parser class for reading CLEF files and creating event</dt><dd><p>collections.</p>
+</dd>
+</dl>
+</dd>
+<dt>Features:</dt><dd><ul class="simple">
+<li><p>Memory-efficient streaming with iter_events() for large files</p></li>
+<li><p>Bulk parsing with parse() for smaller files</p></li>
+<li><p>Automatic field separation (reified vs user fields)</p></li>
+<li><p>Comprehensive error handling with detailed exceptions</p></li>
+<li><p>Support for custom encoding</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Basic file parsing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefParser</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="c1"># Parse entire file into collection</span>
+</span><span data-line="4"><span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;application.clef&#39;</span><span class="p">)</span>
+</span><span data-line="5"><span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">events</span><span class="p">)</span><span class="si">}</span><span class="s2"> events&quot;</span><span class="p">)</span>
+</span><span data-line="8"><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+</span><span data-line="9">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">timestamp</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">level</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Memory-efficient streaming for large files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;large_log.clef&#39;</span><span class="p">)</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="c1"># Process events one at a time without loading all into memory</span>
+</span><span data-line="4"><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">iter_events</span><span class="p">():</span>
+</span><span data-line="5">    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">level</span> <span class="o">==</span> <span class="s1">&#39;Error&#39;</span><span class="p">:</span>
+</span><span data-line="6">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error found: </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="7">        <span class="k">break</span>  <span class="c1"># Can stop early</span>
+</span></pre></div>
+</div>
+<p>Using filters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;application.clef&#39;</span><span class="p">)</span>
+</span><span data-line="2"><span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># Create a filter builder</span>
+</span><span data-line="5"><span class="n">filtered</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">event_filter</span><span class="p">(</span><span class="n">events</span><span class="p">)</span>
+</span><span data-line="6">    <span class="o">.</span><span class="n">level</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">)</span>
+</span><span data-line="7">    <span class="o">.</span><span class="n">start_time</span><span class="p">(</span><span class="s1">&#39;2026-01-24T00:00:00Z&#39;</span><span class="p">)</span>
+</span><span data-line="8">    <span class="o">.</span><span class="n">msg_regex</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;database.*timeout&#39;</span><span class="p">)</span>
+</span><span data-line="9">    <span class="o">.</span><span class="n">filter</span><span class="p">()</span>
+</span><span data-line="10">
+</span><span data-line="11"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">filtered</span><span class="p">)</span><span class="si">}</span><span class="s2"> matching events&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Error handling:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+</span><span data-line="2">    <span class="n">ClefFileNotFoundError</span><span class="p">,</span>
+</span><span data-line="3">    <span class="n">ClefJSONDecodeError</span><span class="p">,</span>
+</span><span data-line="4">    <span class="n">ClefParseError</span>
+</span><span data-line="5"><span class="p">)</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="k">try</span><span class="p">:</span>
+</span><span data-line="8">    <span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;log.clef&#39;</span><span class="p">)</span>
+</span><span data-line="9">    <span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</span><span data-line="10"><span class="k">except</span> <span class="n">ClefFileNotFoundError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="11">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File not found: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="12"><span class="k">except</span> <span class="n">ClefJSONDecodeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="13">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid JSON at line </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">line_num</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="14"><span class="k">except</span> <span class="n">ClefParseError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="15">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parse error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Custom encoding:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Parse file with specific encoding</span>
+</span><span data-line="2"><span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;log_utf16.clef&#39;</span><span class="p">)</span>
+</span><span data-line="3"><span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-16&#39;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<dl>
+<dt>CLEF Field Conventions:</dt><dd><ul class="simple">
+<li><p>Fields starting with &#64; are standard CLEF fields (reified)</p></li>
+<li><p>Fields starting with &#64;&#64; are user fields that should have a single &#64;</p></li>
+<li><p>All other fields are user-defined custom fields</p></li>
+</ul>
+<p>Standard fields: &#64;t, &#64;m, &#64;mt, &#64;l, &#64;x, &#64;i, &#64;r
+User field example: &#64;&#64;UserId becomes &#64;UserId in the user dictionary</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Use iter_events() for files larger than available memory</p></li>
+<li><p>Use parse() for convenience when file size is manageable</p></li>
+<li><p>All methods properly handle malformed JSON and missing files</p></li>
+<li><p>Parser is stateless and thread-safe for reading different files</p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyclef.parser.ClefParser">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pyclef.parser.</span></span><span class="sig-name descname"><span class="pre">ClefParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pyclef/parser.html#ClefParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.parser.ClefParser" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Parser for CLEF (Compact Log Event Format) files.</p>
+<p>This class provides methods for reading CLEF-formatted log files and converting
+them into structured ClefEvent objects. It supports both streaming (memory-efficient)
+and bulk parsing modes, with comprehensive error handling.</p>
+<p>The parser automatically separates standard CLEF fields (those prefixed with &#64;)
+from user-defined fields, and handles the &#64;&#64; escape sequence for user fields
+that should start with a single &#64;.</p>
+<dl class="simple">
+<dt>Class Attributes:</dt><dd><dl class="simple">
+<dt>REIFIED_KEYS (set): Set of standard CLEF field names that should be</dt><dd><p>stored in the reified dictionary.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.parser.ClefParser._file_path">
+<span class="sig-name descname"><span class="pre">_file_path</span></span><a class="headerlink" href="#pyclef.parser.ClefParser._file_path" title="Link to this definition">¶</a></dt>
+<dd><p>Path to the CLEF file to be parsed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Example</p>
+<p>Basic usage:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pyclef</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClefParser</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;application.clef&#39;</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">&gt;&gt;&gt; </span><span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</span><span data-line="4"><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">events</span><span class="p">)</span>
+</span><span data-line="5"><span class="go">1000</span>
+</span></pre></div>
+</div>
+<p>Streaming large files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">parser</span> <span class="o">=</span> <span class="n">ClefParser</span><span class="p">(</span><span class="s1">&#39;huge_log.clef&#39;</span><span class="p">)</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">iter_events</span><span class="p">():</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">level</span> <span class="o">==</span> <span class="s1">&#39;Fatal&#39;</span><span class="p">:</span>
+</span><span data-line="4"><span class="gp">... </span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fatal error: </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="5"><span class="gp">... </span>        <span class="k">break</span>
+</span></pre></div>
+</div>
+<p>Using with filters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">events</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+</span><span data-line="2"><span class="gp">&gt;&gt;&gt; </span><span class="n">errors</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">event_filter</span><span class="p">(</span><span class="n">events</span><span class="p">)</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="o">.</span><span class="n">level</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">)</span>
+</span><span data-line="4"><span class="gp">... </span>    <span class="o">.</span><span class="n">filter</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>The parser is stateless and can be reused for multiple parse operations</p></li>
+<li><p>File is opened and closed automatically for each operation</p></li>
+<li><p>Supports any text encoding recognized by Python’s open()</p></li>
+<li><p>Thread-safe for reading different files with different instances</p></li>
+</ul>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyclef.parser.ClefParser.REIFIED_KEYS">
+<span class="sig-name descname"><span class="pre">REIFIED_KEYS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'&#64;i',</span> <span class="pre">'&#64;l',</span> <span class="pre">'&#64;m',</span> <span class="pre">'&#64;mt',</span> <span class="pre">'&#64;r',</span> <span class="pre">'&#64;t',</span> <span class="pre">'&#64;x'}</span></span><a class="headerlink" href="#pyclef.parser.ClefParser.REIFIED_KEYS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.parser.ClefParser.event_filter">
+<span class="sig-name descname"><span class="pre">event_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyclef.collection.ClefEventCollection" title="pyclef.collection.ClefEventCollection"><span class="pre">ClefEventCollection</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclef.filter.ClefEventFilterBuilder" title="pyclef.filter.ClefEventFilterBuilder"><span class="pre">ClefEventFilterBuilder</span></a></span></span><a class="reference internal" href="_modules/pyclef/parser.html#ClefParser.event_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.parser.ClefParser.event_filter" title="Link to this definition">¶</a></dt>
+<dd><p>Create a filter builder for event collection</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyclef.parser.ClefParser.file_path">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">file_path</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="headerlink" href="#pyclef.parser.ClefParser.file_path" title="Link to this definition">¶</a></dt>
+<dd><p>Public getter for the private _file_path attribute.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.parser.ClefParser.iter_events">
+<span class="sig-name descname"><span class="pre">iter_events</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyclef.event.ClefEvent" title="pyclef.event.ClefEvent"><span class="pre">ClefEvent</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pyclef/parser.html#ClefParser.iter_events"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.parser.ClefParser.iter_events" title="Link to this definition">¶</a></dt>
+<dd><p>Generator that yields events one at a time - best for huge files</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.parser.ClefParser.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'utf-8'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclef.collection.ClefEventCollection" title="pyclef.collection.ClefEventCollection"><span class="pre">ClefEventCollection</span></a></span></span><a class="reference internal" href="_modules/pyclef/parser.html#ClefParser.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.parser.ClefParser.parse" title="Link to this definition">¶</a></dt>
+<dd><p>Parse entire file into a collection</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyclef.parser.ClefParser.parse_event">
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">parse_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyclef.event.ClefEvent" title="pyclef.event.ClefEvent"><span class="pre">ClefEvent</span></a></span></span><a class="reference internal" href="_modules/pyclef/parser.html#ClefParser.parse_event"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyclef.parser.ClefParser.parse_event" title="Link to this definition">¶</a></dt>
+<dd><p>Parse a single event dictionary into ClefEvent</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyclef">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyclef" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="index.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Home</div></div>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Shuvo Paul</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/shibuya.js?v=cac61aee"></script></body>
+</html>
