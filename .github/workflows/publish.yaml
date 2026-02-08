@@ -28,13 +28,12 @@ jobs:
 
       # Step 4: Build the package
       - name: Build package
-        run: python -m build
-
-      # Step 5: Publish to PyPI
+        run: python setup.py sdist bdist_wheel
       - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PYPI_API_TOKEN }}
+        env:
+          TWINE_USERNAME: __token__ 
+          TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+        run: twine upload dist/*
 
       # Step 5: Create a GitHub Release
       - name: Create Release
